@@ -125,6 +125,7 @@ lerna-debug.log*
 /.nyc_output
 
 # IDEs and editors
+.idea
 /.idea
 .project
 .classpath
