@@ -1,0 +1,27 @@
+{
+  "name": "smart_app",
+  "version": "1.0.0",
+  "main": "backend/server.js",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "body-parser": "^1.19.2",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mariadb": "^3.0.0"
+  },
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MikhailDeriabin/smart_app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MikhailDeriabin/smart_app/issues"
+  },
+  "homepage": "https://github.com/MikhailDeriabin/smart_app#readme",
+  "devDependencies": {
+    "cors": "^2.8.5"
+  }
+}

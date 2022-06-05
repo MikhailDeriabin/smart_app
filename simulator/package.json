@@ -1,0 +1,20 @@
+{
+  "name": "simulator",
+  "version": "1.0.0",
+  "main": "backend/server.js",
+  "dependencies": {
+    "sequelize": "^6.17.0"
+  },
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MikhailDeriabin/smart_app/simulator.git"
+  },
+  "author": "Mikhail Deriabin",
+  "license": "ISC",
+  "homepage": "https://github.com/MikhailDeriabin/smart_app/simulator#readme",
+  "devDependencies": {
+    "cors": "^2.8.5"
+  }
+}
