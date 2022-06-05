@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS smartApp;
-CREATE DATABASE smartApp;
-USE smartApp;
+DROP DATABASE IF EXISTS simulator;
+CREATE DATABASE simulator;
+USE simulator;
 
 CREATE TABLE Manufacturer(
     manufacturerName VARCHAR(255) NOT NULL PRIMARY KEY
