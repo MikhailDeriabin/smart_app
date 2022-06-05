@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Devices</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="A Basic HTML5 Template">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a class="clickable" href="simulator.html">Simulator</a>
+                </li>
+                <li class="activeTab">
+                    <a href="#">Devices</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1>Add a device</h1>
+    <section id="addDeviceSection">
+        <form action="POST">
+            <label for="manufacturerSelect">
+                Manufacturer:
+                <select class="clickable" name="manufacturer" id="manufacturerSelect">
+                    <option disabled selected>select manufacturer</option>
+                </select>
+            </label>
+
+
+            <label for="typeSelect">
+                Type:
+                <select class="clickable" name="typeSelect" id="typeSelect">
+                    <option disabled selected>select type</option>
+                </select>
+            </label>
+
+
+            <label for="powerConsuptionSelect">
+                Power consuption(W):
+                <select class="clickable" name="powerConsuption" id="powerConsuptionSelect">
+                    <option disabled selected>select power consuption</option>
+                </select>
+            </label>
+
+            <button class="clickable" type="submit">Add device</button>
+        </form>
+    </section>
+
+    <h1>Your devices</h1>
+    <section id="userDevicesSection">
+    </section>
+
+    <script src="../js/devices.js"></script>
+</body>
+
+</html>
