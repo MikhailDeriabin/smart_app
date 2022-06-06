@@ -9,8 +9,7 @@
     "express": "^4.17.3",
     "mariadb": "^3.0.0"
   },
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MikhailDeriabin/smart_app.git"

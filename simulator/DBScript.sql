@@ -22,7 +22,7 @@ CREATE TABLE asTypeStatus(
 );
 
 CREATE TABLE Device(
-    id INT NOT NULL PRIMARY KEY,
+    deviceId INT NOT NULL PRIMARY KEY,
     powerConsumption DOUBLE DEFAULT 1,
     manufacturerName VARCHAR(255) NOT NULL,
     type VARCHAR(255) NOT NULL,
