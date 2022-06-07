@@ -15,14 +15,15 @@ CREATE TABLE Status(
 );
 
 CREATE TABLE asTypeStatus(
-    type VARCHAR(255) NOT NULL PRIMARY KEY,
+    type VARCHAR(255) NOT NULL,
     status VARCHAR(255) NOT NULL,
     FOREIGN KEY (type) REFERENCES Type(type),
-    FOREIGN KEY (status) REFERENCES Status(status)
+    FOREIGN KEY (status) REFERENCES Status(status),
+    PRIMARY KEY (type, status)
 );
 
 CREATE TABLE Device(
-    deviceId INT NOT NULL PRIMARY KEY,
+    deviceId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     powerConsumption DOUBLE DEFAULT 1,
     manufacturerName VARCHAR(255) NOT NULL,
     type VARCHAR(255) NOT NULL,

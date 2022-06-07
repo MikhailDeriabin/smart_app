@@ -38,7 +38,7 @@ AsTypeStatus.init({
     }
 }, options);
 
-Type.belongsToMany(Status, { through: AsTypeStatus });
-Status.belongsToMany(Type, { through: AsTypeStatus });
+Type.belongsToMany(Status, { through: 'AsTypeStatus', foreignKey: 'type', as: 'Status' });
+Status.belongsToMany(Type, { through: 'AsTypeStatus', foreignKey: 'status', as: 'Type' });
 
 module.exports = AsTypeStatus;

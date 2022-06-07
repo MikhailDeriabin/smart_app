@@ -1,5 +1,8 @@
 const { DataTypes, Model } = require('sequelize');
 const SequelizeUtil = require("../util/SequelizeUtil");
+const Manufacturer = require("./Manufacturer");
+const Type = require("./Type");
+const Status = require("./Status");
 
 const sequelizeUtil = new SequelizeUtil();
 
@@ -21,6 +24,7 @@ Device.init({
     deviceId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true
     },
     powerConsumption: {
@@ -37,8 +41,17 @@ Device.init({
     },
     status: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true,
+        default: 'OFF'
     },
 }, options);
+
+Manufacturer.hasMany(Device, { foreignKey: 'manufacturerName' });
+Type.hasMany(Device, { foreignKey: 'type' });
+Status.hasMany(Device, { foreignKey: 'status' });
+
+Device.belongsTo(Manufacturer, { foreignKey: 'manufacturerName' });
+Device.belongsTo(Type, { foreignKey: 'type' });
+Device.belongsTo(Status, { foreignKey: 'status' });
 
 module.exports = Device;
