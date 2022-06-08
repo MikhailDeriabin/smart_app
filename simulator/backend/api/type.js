@@ -5,6 +5,7 @@ const Type = require("../model/Type");
 const ResponseUtil = require("../util/ResponseUtil");
 const AsTypeStatus = require("../model/AsTypeStatus");
 const Status = require("../model/Status");
+const Device = require("../model/Device");
 
 const responseUtil = new ResponseUtil();
 
@@ -15,7 +16,7 @@ router.post('/', async (req, res) => {
             const resp = await Type.create(reqBody);
 
             const status = reqBody.status;
-            if(status != null)
+            if(status != null && status.length > 0)
                 await addAsTypeStatus(resp.dataValues.type, status);
             else{
                 await addAsTypeStatus(resp.dataValues.type, ['OFF', 'ON']);
@@ -76,6 +77,7 @@ router.delete('/:type', async (req, res) => {
     try{
         const key = req.params.type;
         if(key != null){
+            await Device.destroy({ where: { type: key } });
             await AsTypeStatus.destroy({ where: { type: key } });
             const resp = await Type.destroy({ where: { type: key } });
             responseUtil.sendResultOfQuery(res, resp > 0);

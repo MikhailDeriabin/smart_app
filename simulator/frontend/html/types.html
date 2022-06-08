@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Types</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li>
+                <a href="simulator.html">Simulator</a>
+            </li>
+            <li>
+                <a href="devices.html">Devices</a>
+            </li>
+            <li class="activeTab">
+                <a href="#">Types</a>
+            </li>
+            <li>
+                <a href="statuses.html">Statuses</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<section id="addTypeSection">
+    <h1>Add a device type</h1>
+    <form action="POST">
+        <label for="typeInput">
+            Type*:
+            <input type="text" class="clickable" name="typeInput" placeholder="type device type" id="typeInput"/>
+        </label>
+        <fieldset id="statusesFieldset">
+        <legend>Choose possible statuses for the type(optional):</legend>
+        </fieldset>
+        <button id="addTypeButton" class="clickable" type="button">Add type</button>
+    </form>
+    <p class="infoBoxP"></p>
+</section>
+
+<h1>Types</h1>
+<table id="typesTable">
+
+</table>
+
+<script type="module" src="../js/util/FetchUtil.js"></script>
+<script type="module" src="../js/util/ValidationUtil.js"></script>
+<script type="module" src="../js/util/UIUtil.js"></script>
+<script type="module" src="../js/types.js"></script>
+</body>
+</html>
