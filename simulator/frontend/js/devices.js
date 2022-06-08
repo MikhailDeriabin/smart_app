@@ -51,6 +51,7 @@ addDeviceButton.addEventListener("click", async () => {
                 infoBoxP.textContent = "something went wrong";
         }catch (e) {
             console.log(e);
+            infoBoxP.textContent = "something went wrong";
         }
     } else{
         infoBoxP.textContent = "please, check the required parameters";
