@@ -38,16 +38,16 @@ app.listen(port,  async () => {
     if(isSequelizeConnected){
         console.log(`Server started on port ${port} // http://${host}:${port}/`);
 
-        //const posted = await axios.post(`http://${host}:${port}/api/status/`, {status: 'Test1', type: ['lamp', 'camera'] });
+        //const posted = await axios.post(`http://${host}:${port}/api/type/`, {powerConsumption: 10, manufacturerName: 'Bosch', type: 'lamp'});
         //console.log(posted.data);
 
         //const readed = await axios.get(`http://${host}:${port}/api/type/lamp`);
         //console.log(readed.data);
 
-        //const updated = await axios.put(`http://${host}:${port}/api/status/`, {status: 'Test1', typeDelete: 'katle', typeAdd: 'lamp' });
+        //const updated = await axios.put(`http://${host}:${port}/api/type/`, {type: 'camera', statusAdd: ['OFF', 'ON'] });
         //console.log(updated.data);
 
-        //const deleted = await axios.delete(`http://${host}:${port}/api/status/Test1`);
+        //const deleted = await axios.delete(`http://${host}:${port}/api/type/lamp`);
         //console.log(deleted.data);
     }
 });

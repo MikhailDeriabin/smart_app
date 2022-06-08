@@ -17,7 +17,9 @@ router.post('/', async (req, res) => {
             const status = reqBody.status;
             if(status != null)
                 await addAsTypeStatus(resp.dataValues.type, status);
-
+            else{
+                await addAsTypeStatus(resp.dataValues.type, ['OFF', 'ON']);
+            }
             responseUtil.sendResultOfQuery(res, resp.dataValues);
         }
     }catch (e) {

@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
 router.get('/:deviceId', async (req, res) => {
     try{
        const key = req.params.deviceId;
-       const resp = await Device.findByPk(key, { include: { all: true } });
+       const resp = await Device.findByPk(key);
        responseUtil.sendResultOfQuery(res, resp.dataValues);
     }catch (e) {
         console.log(e);
@@ -32,7 +32,7 @@ router.get('/:deviceId', async (req, res) => {
 
 router.get('/', async (req, res) => {
     try{
-        const resp = await Device.findAll({ include: { all: true } });
+        const resp = await Device.findAll();
         responseUtil.sendResultOfQuery(res, responseUtil.getDataValues(resp));
     }catch (e) {
         console.log(e);

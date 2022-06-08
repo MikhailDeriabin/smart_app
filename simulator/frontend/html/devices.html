@@ -27,37 +27,37 @@
     <section id="addDeviceSection">
         <form action="POST">
             <label for="manufacturerSelect">
-                Manufacturer:
-                <select class="clickable" name="manufacturer" id="manufacturerSelect">
-                    <option disabled selected>select manufacturer</option>
+                Manufacturer*:
+                <select class="clickable" name="manufacturerName" id="manufacturerSelect">
                 </select>
             </label>
 
 
             <label for="typeSelect">
-                Type:
-                <select class="clickable" name="typeSelect" id="typeSelect">
-                    <option disabled selected>select type</option>
+                Type*:
+                <select class="clickable" name="type" id="typeSelect">
                 </select>
             </label>
 
 
-            <label for="powerConsuptionSelect">
-                Power consuption(W):
-                <select class="clickable" name="powerConsuption" id="powerConsuptionSelect">
-                    <option disabled selected>select power consuption</option>
-                </select>
+            <label for="powerConsumptionInput">
+                Power consumption(W)*:
+                <input type="number" class="clickable" name="powerConsumption" placeholder="type power consumption" id="powerConsumptionInput"/>
             </label>
 
-            <button class="clickable" type="submit">Add device</button>
+            <button id="addDeviceButton" class="clickable" type="button">Add device</button>
         </form>
+        <p class="infoBoxP"></p>
     </section>
 
     <h1>Your devices</h1>
     <section id="userDevicesSection">
     </section>
 
-    <script src="../js/devices.js"></script>
+    <script type="module" src="../js/util/FetchUtil.js"></script>
+    <script type="module" src="../js/util/ValidationUtil.js"></script>
+    <script type="module" src="../js/util/UIUtil.js"></script>
+    <script type="module" src="../js/devices.js"></script>
 </body>
 
 </html>

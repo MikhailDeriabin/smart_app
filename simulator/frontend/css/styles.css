@@ -75,7 +75,7 @@ nav li>a {
     min-height: 30px;
 }
 
-#userDevicesSection {
+#userDevicesSection, #devicesSection {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -89,6 +89,9 @@ nav li>a {
     max-height: 200px;
     min-width: 200px;
     min-height: 150px;
+
+    padding: 20px 0 0 0;
+
     border: 1px solid black;
 }
 
