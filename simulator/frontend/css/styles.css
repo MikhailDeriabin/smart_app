@@ -60,10 +60,26 @@ nav li>a {
     color: white;
 }
 
+section{
+    margin-bottom: 30px;
+}
+
+table td, table th {
+    padding: 8px;
+}
+
+table th{
+    text-align: left;
+}
+
+button{
+    padding: 5px 10px;
+}
+
 #addDeviceSection form {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 80%;
 }
 
 #addDeviceSection form>* {
@@ -103,4 +119,25 @@ nav li>a {
 .deviceCard button {
     min-width: 100px;
     min-height: 30px;
+}
+
+#updateTypeSection form, #addTypeSection form{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.statusesFieldset{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+}
+
+.updateDeleteBar{
+    display: flex;
+    gap: 10px;
 }

@@ -44,7 +44,7 @@ app.listen(port,  async () => {
         //const readed = await axios.get(`http://${host}:${port}/api/type/lamp`);
         //console.log(readed.data);
 
-        //const updated = await axios.put(`http://${host}:${port}/api/type/`, {type: 'camera', statusAdd: ['OFF', 'ON'] });
+        //const updated = await axios.put(`http://${host}:${port}/api/type/`, {type: 'CAMERA', statusUpdate: ['OFF', 'ON', 'Test2'] });
         //console.log(updated.data);
 
         //const deleted = await axios.delete(`http://${host}:${port}/api/type/lamp`);

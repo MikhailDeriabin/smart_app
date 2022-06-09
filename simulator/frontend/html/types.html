@@ -28,22 +28,41 @@
 
 <section id="addTypeSection">
     <h1>Add a device type</h1>
-    <form action="POST">
+    <form>
         <label for="typeInput">
             Type*:
             <input type="text" class="clickable" name="typeInput" placeholder="type device type" id="typeInput"/>
         </label>
-        <fieldset id="statusesFieldset">
+        <fieldset class="statusesFieldset">
         <legend>Choose possible statuses for the type(optional):</legend>
         </fieldset>
-        <button id="addTypeButton" class="clickable" type="button">Add type</button>
     </form>
+    <button id="addTypeButton" class="clickable" type="button">Add type</button>
+    <p class="infoBoxP"></p>
+</section>
+
+<section id="updateTypeSection">
+    <h1>Update a device type</h1>
+    <form>
+        <label for="typeSelect">
+            Type*:
+            <select id="typeSelect"></select>
+        </label>
+        <fieldset class="statusesFieldset">
+            <legend>Choose possible statuses for the type:</legend>
+        </fieldset>
+    </form>
+    <button id="updateTypeButton" class="clickable" type="button">Update type</button>
     <p class="infoBoxP"></p>
 </section>
 
 <h1>Types</h1>
 <table id="typesTable">
-
+    <tr>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
 </table>
 
 <script type="module" src="../js/util/FetchUtil.js"></script>

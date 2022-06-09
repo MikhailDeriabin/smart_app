@@ -132,6 +132,7 @@ export class UIUtil {
     addUpdateDeleteBarToRow(row, updateAttr, deleteAttr, updateEventHandler, deleteEventHandler){
         const lastCell = row.children[row.children.length-1];
         const bar = document.createElement('div');
+        bar.classList.add('updateDeleteBar');
         const updateButton = this.generateButton('update', updateAttr, null, 'clickable', updateEventHandler);
         const deleteButton = this.generateButton('delete', deleteAttr, null, 'clickable', deleteEventHandler);
         bar.append(updateButton, deleteButton);
