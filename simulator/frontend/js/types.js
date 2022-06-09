@@ -7,21 +7,42 @@ const validationUtil = new ValidationUtil();
 const uiUtil = new UIUtil();
 
 const addTypeSection = document.querySelector("#addTypeSection");
-const statusesFieldset = addTypeSection.querySelector("#statusesFieldset");
-let statusCheckboxes;
-const addTypeButton = addTypeSection.querySelector('#addTypeButton');
 const typeInput = addTypeSection.querySelector('#typeInput');
-const infoBoxP = addTypeSection.querySelector(".infoBoxP");
+const statusesAddFieldset = addTypeSection.querySelector(".statusesFieldset");
+let statusAddCheckboxes;
+const addTypeButton = addTypeSection.querySelector('#addTypeButton');
+const infoBoxAddP = addTypeSection.querySelector(".infoBoxP");
+
+const updateTypeSection = document.querySelector('#updateTypeSection');
+const typeSelect = updateTypeSection.querySelector('#typeSelect');
+const statusesUpdateFieldset = updateTypeSection.querySelector(".statusesFieldset");
+let statusUpdateCheckboxes;
+const updateTypeButton = updateTypeSection.querySelector('#updateTypeButton');
+const infoBoxUpdateP = updateTypeSection.querySelector(".infoBoxP");
+
 const typesTable = document.querySelector("#typesTable");
 
 window.addEventListener("load", async () => {
     const statuses = await fetchUtil.getDB('status');
-    const statusLabelCheckboxes = uiUtil.generateCheckLabelBoxes(statuses, 'status', 'statusCheckbox');
-    statusesFieldset.append(...statusLabelCheckboxes);
-    statusCheckboxes = statusesFieldset.querySelectorAll('.statusCheckbox');
+    const statusLabelCheckboxesAdd = uiUtil.generateCheckLabelBoxes(statuses, 'status', 'statusCheckbox');
+    statusesAddFieldset.append(...statusLabelCheckboxesAdd);
+    statusAddCheckboxes = statusesAddFieldset.querySelectorAll('.statusCheckbox');
+
+    const statusLabelCheckboxesUpdate = uiUtil.generateCheckLabelBoxes(statuses, 'status', 'statusCheckbox');
+    statusesUpdateFieldset.append(...statusLabelCheckboxesUpdate);
+    statusUpdateCheckboxes = statusesUpdateFieldset.querySelectorAll('.statusCheckbox');
 
     const types = await fetchUtil.getDB('type');
-    const rows = uiUtil.generateTypeStatusRows(types, 'type', 'Status', 'status', null, deleteType);
+
+    const typeSelectOptions = uiUtil.generateOptionArray(types, 'type', '');
+    typeSelect.append(...typeSelectOptions);
+
+    if(types != null && types.length > 0){
+        const firstTypeStatuses = types[0].Status;
+        updateStatusCheckboxesOnSelect(firstTypeStatuses);
+    }
+
+    const rows = uiUtil.generateTypeStatusRows(types, 'type', 'Status', 'status', updateType, deleteType);
     typesTable.append(...rows);
 });
 
@@ -31,9 +52,9 @@ addTypeButton.addEventListener('click', async () => {
     if(!validationUtil.hasStrArrayNullEmpty([ typeName ])){
         try{
             const chosenStatuses = [];
-            for(let i=0; i<statusCheckboxes.length; i++){
-                if(statusCheckboxes[i].checked)
-                    chosenStatuses.push(statusCheckboxes[i].value);
+            for(let i=0; i<statusAddCheckboxes.length; i++){
+                if(statusAddCheckboxes[i].checked)
+                    chosenStatuses.push(statusAddCheckboxes[i].value);
             }
 
             const upperCaseTypeName = typeName.toUpperCase();
@@ -44,17 +65,51 @@ addTypeButton.addEventListener('click', async () => {
             if(type != null){
                 const typeStatuses = await fetchUtil.getDB(`type/${type.type}`);
                 type.Status = typeStatuses.Status;
-                const newTypeRow = uiUtil.generateTypeStatusRows([type], 'type', 'Status', 'status', null, deleteType);
+                const newTypeRow = uiUtil.generateTypeStatusRows([type], 'type', 'Status', 'status', updateType, deleteType);
                 typesTable.append(...newTypeRow);
-                infoBoxP.textContent = "type created";
+                infoBoxAddP.textContent = "type created";
             }else
-                infoBoxP.textContent = "something went wrong";
+                infoBoxAddP.textContent = "something went wrong";
         }catch (e) {
             console.log(e);
-            infoBoxP.textContent = "something went wrong";
+            infoBoxAddP.textContent = "something went wrong";
         }
     } else{
-        infoBoxP.textContent = "please, check the required parameters";
+        infoBoxAddP.textContent = "please, check the required parameters";
+    }
+});
+
+typeSelect.addEventListener('change', async () => {
+    const selectedType = typeSelect.value;
+    const typeData = await fetchUtil.getDB(`type/${selectedType}`);
+    const typeStatuses = typeData.Status;
+    updateStatusCheckboxesOnSelect(typeStatuses);
+});
+
+updateTypeButton.addEventListener('click', async () => {
+    try{
+        const type = typeSelect.value;
+        const statusesAdd = [];
+        for(let i=0; i<statusUpdateCheckboxes.length; i++){
+            if(statusUpdateCheckboxes[i].checked)
+                statusesAdd.push(statusUpdateCheckboxes[i].value);
+        }
+
+        const statusesDelete = [];
+        for(let i=0; i<statusUpdateCheckboxes.length; i++){
+            if(!statusUpdateCheckboxes[i].checked)
+                statusesDelete.push(statusUpdateCheckboxes[i].value);
+        }
+
+        const result = await fetchUtil.putDB('type',  { type: type, statusUpdate: statusesAdd, statusDelete: statusesDelete });
+        if(result === true){
+            infoBoxUpdateP.textContent = "type updated";
+        } else{
+            infoBoxUpdateP.textContent = "something went wrong";
+        }
+    }catch (e) {
+        console.log(e);
+        infoBoxUpdateP.textContent = "something went wrong";
     }
 });
 
@@ -64,4 +119,24 @@ async function deleteType(evt) {
     const isSuccess = await fetchUtil.deleteDB(`type/${type}`);
     if(isSuccess)
         button.closest('tr').remove();
+}
+
+function updateType(evt) {
+    const button = evt.target;
+    const type = button.dataset.value;
+    typeSelect.value = type;
+    typeSelect.dispatchEvent(new Event('change'))
+}
+
+function updateStatusCheckboxesOnSelect(typeStatuses) {
+    const statusStrings = [];
+    for(let i=0; i<typeStatuses.length; i++)
+        statusStrings.push(typeStatuses[i].status);
+
+    for(let i=0; i<statusUpdateCheckboxes.length; i++) {
+        if (statusStrings.includes(statusUpdateCheckboxes[i].value))
+            statusUpdateCheckboxes[i].checked = true;
+        else
+            statusUpdateCheckboxes[i].checked = false;
+    }
 }
