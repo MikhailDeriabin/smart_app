@@ -121,7 +121,7 @@ button{
     min-height: 30px;
 }
 
-#updateTypeSection form, #addTypeSection form{
+#updateTypeSection form, #addTypeSection form, #updateStatusSection form, #addStatusSection form{
     display: flex;
     flex-direction: column;
     width: 80%;
@@ -129,7 +129,7 @@ button{
     margin-bottom: 10px;
 }
 
-.statusesFieldset{
+.statusesFieldset, .typesFieldset{
     display: flex;
     flex-wrap: wrap;
     align-items: center;

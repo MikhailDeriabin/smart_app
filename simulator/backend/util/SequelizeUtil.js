@@ -11,7 +11,7 @@ let instance = undefined;
 const dbSettings = {
     host: process.env.DATABASE_HOST,
     dialect: process.env.DATABASE_DIALECT || "mariadb",
-    logging: true
+    logging: false
 }
 
 const createInstance = () => {

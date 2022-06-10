@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Title</title>
+    <title>Types</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../css/styles.css">
@@ -25,5 +25,49 @@
         </ul>
     </nav>
 </header>
+
+<section id="addStatusSection">
+    <h1>Add a device status</h1>
+    <form>
+        <label for="statusInput">
+            Status*:
+            <input type="text" class="clickable" name="statusInput" placeholder="type device status" id="statusInput"/>
+        </label>
+        <fieldset class="typesFieldset">
+            <legend>Choose possible types for the status(optional):</legend>
+        </fieldset>
+    </form>
+    <button id="addStatusButton" class="clickable" type="button">Add status</button>
+    <p class="infoBoxP"></p>
+</section>
+
+<section id="updateStatusSection">
+    <h1>Update a device status</h1>
+    <form>
+        <label for="statusSelect">
+            Status*:
+            <select id="statusSelect"></select>
+        </label>
+        <fieldset class="typesFieldset">
+            <legend>Choose possible types for the status:</legend>
+        </fieldset>
+    </form>
+    <button id="updateStatusButton" class="clickable" type="button">Update status</button>
+    <p class="infoBoxP"></p>
+</section>
+
+<h1>Statuses</h1>
+<table id="statusesTable">
+    <tr>
+        <th>Status</th>
+        <th>Type</th>
+        <th>Actions</th>
+    </tr>
+</table>
+
+<script type="module" src="../js/util/FetchUtil.js"></script>
+<script type="module" src="../js/util/ValidationUtil.js"></script>
+<script type="module" src="../js/util/UIUtil.js"></script>
+<script type="module" src="../js/statuses.js"></script>
 </body>
 </html>
