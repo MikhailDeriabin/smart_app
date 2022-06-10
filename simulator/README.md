@@ -42,7 +42,7 @@ Added types of the devices. Also for each type should be determined possible sta
 Added statuses of the devices. Also for each status should be determined possible types. For example for OFF it may be lamp, fridge and for FREEZE it can be fridge only
 
 ## API description
-| Action | Path | Method | Request example | Response example | Possible responses |
+| Action | Path | Method | Request body example | Response example | Possible responses |
 | -------- | ---- | ----- | ----- | ----- | ----- |
 | Create a new device | /api/device | POST | { "powerConsumption": 700, "manufacturerName": "Bosch", "type": "KATLE", "status" : "OFF" } | { "deviceId": 2, "powerConsumption": 700, "manufacturerName": "Bosch", "type": "KATLE", "status": "OFF" } | object with the created device data, null - error |
 | Change a device status | /api/device | PUT | { deviceId: 1, status: 'ON' } | true | true - updated, false - not updated(already was this status), null - error |
