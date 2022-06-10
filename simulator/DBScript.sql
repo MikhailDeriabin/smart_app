@@ -14,7 +14,7 @@ CREATE TABLE Status(
     status VARCHAR(255) NOT NULL PRIMARY KEY
 );
 
-CREATE TABLE asTypeStatus(
+CREATE TABLE AsTypeStatus(
     type VARCHAR(255) NOT NULL,
     status VARCHAR(255) NOT NULL,
     FOREIGN KEY (type) REFERENCES Type(type),
@@ -34,5 +34,6 @@ CREATE TABLE Device(
 );
 
 INSERT INTO Manufacturer (manufacturerName) VALUES ('Xiaomi'), ('Nexa'), ('Roborock'), ('Garmin'), ('Bosch');
-INSERT INTO Type (type) VALUES ('lamp'), ('katle'), ('cooling_fan'), ('camera');
+INSERT INTO Type (type) VALUES ('LAMP'), ('KATLE'), ('COOLING_FAN'), ('CAMERA');
 INSERT INTO Status (status) VALUES ('ON'), ('OFF');
+INSERT INTO asTypeStatus (type, status) VALUES ('LAMP', 'ON'), ('LAMP', 'OFF'), ('KATLE', 'ON'), ('KATLE', 'OFF'), ('COOLING_FAN', 'ON'), ('COOLING_FAN', 'OFF'), ('CAMERA', 'ON'), ('CAMERA', 'OFF');
