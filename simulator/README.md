@@ -51,4 +51,8 @@ Added statuses of the devices. Also for each status should be determined possibl
 | Delete a device by id | /api/device/:deviceId | DELETE | ----- | true | true - deleted, false - not deleted (did not exist or already was deleted) |
 
 ## DB diagrams
-![DB ER diagram](http://url/to/img.png)
+* ER diagram
+![DB ER diagram](https://github.com/MikhailDeriabin/smart_app/blob/master/simulator/doc_img/ER_diagram.png)
+
+* Relational schema
+![DB relational diagram](https://github.com/MikhailDeriabin/smart_app/blob/master/simulator/doc_img/Rel_diagram.png)
