@@ -49,3 +49,6 @@ Added statuses of the devices. Also for each status should be determined possibl
 | Get all devices data | /api/device | GET | ----- | [ { "deviceId": 1, "powerConsumption": 700, "manufacturerName": "Bosch", "type": "KATLE", "status": "OFF" } ] | array with objects with device data, null - error |
 | Get a device by id | /api/device/:deviceId | GET | ----- | { "deviceId": 1, "powerConsumption": 700, "manufacturerName": "Bosch", "type": "KATLE", "status": "OFF" } | object with the device data, null - error |
 | Delete a device by id | /api/device/:deviceId | DELETE | ----- | true | true - deleted, false - not deleted (did not exist or already was deleted) |
+
+## DB diagrams
+![DB ER diagram](http://url/to/img.png)
