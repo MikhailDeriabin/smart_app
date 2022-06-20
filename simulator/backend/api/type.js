@@ -70,7 +70,7 @@ router.put('/', async (req, res) => {
                     await deleteAsTypeStatus(type, statusUpdate);
                     await addAsTypeStatus(type, statusUpdate).then((resp) => {
                         responseUtil.sendResultOfQuery(res, resp != null);
-                    });;
+                    });
                 }
             }
         }

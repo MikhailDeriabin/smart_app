@@ -51,7 +51,7 @@ router.put('/', async (req, res) => {
     try{
         const reqBody = req.body;
         if(reqBody != null){
-            const {status, typeAdd, typeDelete} = reqBody;
+            const {status, typeAdd, typeDelete, typeUpdate} = reqBody;
             if(status != null && (typeAdd != null || typeDelete != null)){
                 if(typeDelete != null){
                     await deleteAsTypeStatus(status, typeDelete);
@@ -59,6 +59,13 @@ router.put('/', async (req, res) => {
 
                 if(typeAdd != null){
                     await addAsTypeStatus(status, typeAdd).then((resp) => {
+                        responseUtil.sendResultOfQuery(res, resp != null);
+                    });
+                }
+
+                if(typeUpdate != null){
+                    await deleteAsTypeStatus(status, typeUpdate);
+                    await addAsTypeStatus(status, typeUpdate).then((resp) => {
                         responseUtil.sendResultOfQuery(res, resp != null);
                     });
                 }

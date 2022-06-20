@@ -49,8 +49,6 @@ export class UIUtil {
         deviceSelect.addEventListener('change', (evt) => {
             const select = evt.target;
             const changedStatus = select.value;
-            console.log(deviceObj.deviceId);
-            console.log(changedStatus);
             fetchUtil.putDB(`device`, { deviceId: deviceObj.deviceId, status: changedStatus });
         })
 
