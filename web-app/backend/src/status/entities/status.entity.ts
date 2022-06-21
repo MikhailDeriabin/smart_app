@@ -36,8 +36,7 @@ export class Status {
     devices?: Device[];
 
     @ApiProperty({ type: () => Type })
-    @ManyToMany(() => Type, (type) => type.statuses, { cascade: true })
-    @JoinTable()
+    @ManyToMany(() => Type, (type) => type.statuses, )
     types: Type[];
 
 }

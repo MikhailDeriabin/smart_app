@@ -1,7 +1,7 @@
 import {
     Column,
     CreateDateColumn,
-    Entity,
+    Entity, JoinTable,
     ManyToMany,
     ManyToOne,
     OneToMany,
@@ -41,7 +41,8 @@ export class Type {
     manufacturer: Manufacturer;
 
     @ApiProperty({ type: () => Status })
-    @ManyToMany(() => Status, (status) => status.types)
+    @ManyToMany(() => Status, (status) => status.types, { cascade: true })
+    @JoinTable()
     statuses: Status[];
 
 }
