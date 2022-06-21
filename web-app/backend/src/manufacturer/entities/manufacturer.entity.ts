@@ -1,4 +1,4 @@
-import {Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {CreateDateColumn, Entity, OneToMany, Column, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
 import {ApiProperty} from "@nestjs/swagger";
 import {Device} from "../../device/entities/device.entity";
 import {Type} from "../../type/entities/type.entity";
@@ -6,9 +6,22 @@ import {Type} from "../../type/entities/type.entity";
 @Entity()
 export class Manufacturer {
 
+
     @ApiProperty()
     @PrimaryGeneratedColumn()
-    name: string;
+    id: number;
+
+    @ApiProperty()
+    @Column()
+    manufacturerName: string;
+
+    @ApiProperty()
+    @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+    created: Date;
+
+    @ApiProperty()
+    @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
+    updated: Date;
 
     @ApiProperty({ type: () => Device })
     @OneToMany(() => Device, (device) => device.manufacturer)

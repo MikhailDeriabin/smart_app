@@ -1,7 +1,15 @@
-import {Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    ManyToMany,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn
+} from "typeorm";
 import {Device} from "../../device/entities/device.entity";
 import {ApiProperty} from "@nestjs/swagger";
-import {DeviceGroup} from "../../device-group/entities/device-group.entity";
 import {Manufacturer} from "../../manufacturer/entities/manufacturer.entity";
 import {Status} from "../../status/entities/status.entity";
 
@@ -10,7 +18,19 @@ export class Type {
 
     @ApiProperty()
     @PrimaryGeneratedColumn()
-    type: string;
+    id: number;
+
+    @ApiProperty()
+    @Column()
+    typeName: string;
+
+    @ApiProperty()
+    @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+    created: Date;
+
+    @ApiProperty()
+    @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
+    updated: Date;
 
     @ApiProperty({ type: () => Device })
     @OneToMany(() => Device, (device) => device.type)
@@ -22,7 +42,6 @@ export class Type {
 
     @ApiProperty({ type: () => Status })
     @ManyToMany(() => Status, (status) => status.types)
-    @JoinTable()
     statuses: Status[];
 
 }

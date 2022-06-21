@@ -1,8 +1,9 @@
 import {
-    Column,
+    Column, CreateDateColumn,
     Entity,
-    PrimaryGeneratedColumn,
+    PrimaryGeneratedColumn, UpdateDateColumn,
 } from 'typeorm';
+import {ApiProperty} from "@nestjs/swagger";
 
 @Entity()
 export class User {
@@ -13,8 +14,16 @@ export class User {
     username: string;
     @Column()
     password: string;
-    created?: Date;
-    modified?: Date;
-    isValid?: boolean
+
+    @ApiProperty()
+    @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+    created: Date;
+
+    @ApiProperty()
+    @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
+    updated: Date;
+    
+    @Column()
+    isValid: boolean
 
 }
