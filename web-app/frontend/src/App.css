@@ -25,3 +25,39 @@ p, h1, h2, h3, h4, h5, h6 {
 #root, #__next {
     isolation: isolate;
 }
+
+.container{
+  /*  max-width: 1200px;*/
+    margin: 0px auto;
+    padding: 0px 15px;
+    background-color: aqua;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+
+@media (min-width: 1392px) {
+    .container {
+        width: 1320px;
+    }
+}
+
+
+
+
