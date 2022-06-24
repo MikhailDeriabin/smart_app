@@ -5,12 +5,11 @@ import {DocumentBuilder, SwaggerModule} from "@nestjs/swagger";
 const swaggerInfo = {
   api_patch: "/docs",
   title: "SmartApp API",
-  decription: "",
+  decription: "Here you can test all crud operations",
   version: "1.0",
   tag:""
 
 };
-
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

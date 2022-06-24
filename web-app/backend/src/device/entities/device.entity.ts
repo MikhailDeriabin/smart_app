@@ -23,7 +23,7 @@ export class Device {
 
     @ApiProperty()
     @Column({ unique: true })
-    deviceName: string;
+    deviceName?: string;
 
     @ApiProperty()
     @Column()
