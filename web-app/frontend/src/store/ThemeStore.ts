@@ -10,7 +10,6 @@ class ThemeStore {
 
     toggleTheme() {
         this.theme = this.theme === "light" ? "dark" : "light"
-        console.log(this.theme)
     }
 
     get currentTheme() {

@@ -1,10 +1,16 @@
 import React from 'react';
+import {useNavigate} from "react-router-dom";
 
-const Header: React.FC = () => {
+
+
+const Header = () => {
+    const navigate = useNavigate();
     return (
         <header className="header">
                 <h1>SmartApp</h1>
-                <nav></nav>
+                <nav>
+                    <button onClick={()=>navigate("/settings")}>Go to settings page</button>
+                </nav>
         </header>
     );
 };
