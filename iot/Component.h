@@ -4,13 +4,11 @@
 class Component{
 protected:
     const int pinNumber;
-    char name[];
 public:
-    Component(int pinNumber, char name[]) : pinNumber(pinNumber){
-        pinNumber = pinNumber;
-    }
+    Component(int pinNumber);
 
     virtual char * toString();
+    int getPinNumber();
 };
 
 #endif
