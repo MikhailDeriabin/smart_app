@@ -8,7 +8,6 @@ const Main = () => {
     return (
         <div>
             <div className="container">
-                <Header/>
                 <h1>The Mobx use case example(Light/Dark mode)</h1>
                 <div className="testElement">
                     {

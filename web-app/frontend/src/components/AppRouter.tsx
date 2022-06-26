@@ -9,7 +9,6 @@ const AppRouter = () => {
 
     return (
         <>
-            <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Main/>}/>
                     <Route path="/settings" element={<Settings/>}/>
@@ -19,7 +18,6 @@ const AppRouter = () => {
                         element={<Navigate to="404" replace />}
                     />
                 </Routes>
-            </BrowserRouter>
         </>
     );
 }

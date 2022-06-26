@@ -6,7 +6,7 @@ import {useNavigate} from "react-router-dom";
 const Settings = () => {
     const navigate = useNavigate();
     return (
-        <div>
+        <div className="container">
             <ToggleThemeButton/>
             <button onClick={()=>navigate("/")}>Go back</button>
         </div>

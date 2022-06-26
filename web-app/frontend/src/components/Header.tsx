@@ -6,12 +6,14 @@ import {useNavigate} from "react-router-dom";
 const Header = () => {
     const navigate = useNavigate();
     return (
-        <header className="header">
+        <div className="container">
+            <header className="header">
                 <h1>SmartApp</h1>
                 <nav>
-                    <button onClick={()=>navigate("/settings")}>Go to settings page</button>
+                    <button onClick={()=>navigate("/settings")}>Settings</button>
                 </nav>
-        </header>
+            </header>
+        </div>
     );
 };
 export default Header;
