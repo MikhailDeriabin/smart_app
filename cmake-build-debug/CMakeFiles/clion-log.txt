@@ -1,0 +1,1 @@
+CMakeLists.txt not found in C:\Users\mikko\Desktop\folders\projects\smart_app Select CMakeLists.txt
