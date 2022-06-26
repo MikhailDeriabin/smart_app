@@ -4,9 +4,7 @@ import Settings from "../pages/Settings";
 import Error from "../pages/Error";
 import Main from "../pages/Main";
 
-
 const AppRouter = () => {
-
     return (
         <>
                 <Routes>
