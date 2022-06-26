@@ -9,7 +9,7 @@ import {BrowserRouter} from "react-router-dom";
 const App = observer( () => {
 
     return (
-          <div className="App" id={ThemeStore.currentTheme}>
+          <div className="App" id={ThemeStore.theme}>
               <BrowserRouter>
                   <Header/>
                   <AppRouter/>

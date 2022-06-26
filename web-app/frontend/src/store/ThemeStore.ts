@@ -1,20 +1,26 @@
 import { makeAutoObservable } from "mobx";
+import Cookie from 'mobx-cookie';
 
 class ThemeStore {
 
-    private theme: string = "light"
+    private themeCookie = new Cookie('theme')
 
     constructor() {
-        makeAutoObservable(this)
+        makeAutoObservable(this);
     }
 
-    toggleTheme() {
-        this.theme = this.theme === "light" ? "dark" : "light"
+    get theme() {
+        return !this.themeCookie.value  ? "light" : this.themeCookie.value;
     }
 
-    get currentTheme() {
-        return this.theme;
+    setTheme = () => {
+        this.themeCookie.set(this.theme!=null && this.theme==="light"? "dark" : "light", { expires: 365 }) // 365 day expiry
     }
+
+    unsetTheme = () => {
+        this.themeCookie.remove()
+    }
+
 }
 
 export default new ThemeStore();
