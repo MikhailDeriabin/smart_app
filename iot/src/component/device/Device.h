@@ -1,7 +1,7 @@
 #ifndef DEVICE_H
 #define DEVICE_H
 
-#include "Component.h"
+#include "../Component.h"
 
 class Device : public Component{
 
