@@ -1,5 +1,5 @@
 #include "Device.h"
-#include "Component.h"
+#include "../Component.h"
 #include "Arduino.h"
 
 Device::Device(int pinNumber) : Component(pinNumber){
