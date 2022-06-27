@@ -1,12 +1,9 @@
-#include "Lamp.h"
+#include "src/component/device/Lamp.h"
 
-const int ledPin = 2;
-const int switchPin = 3;
-
+//define components that will be used in the sketch
 Lamp lamp(2);
 
-void setup() { 
-    
+void setup() {  
 }
 
 void loop() {
