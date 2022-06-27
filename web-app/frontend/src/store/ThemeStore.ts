@@ -10,11 +10,11 @@ class ThemeStore {
     }
 
     get theme() {
-        return !this.themeCookie.value  ? "light" : this.themeCookie.value;
+        return this.themeCookie.value  ? this.themeCookie.value : "light";
     }
 
     setTheme = () => {
-        this.themeCookie.set(this.theme!=null && this.theme==="light"? "dark" : "light", { expires: 365 }) // 365 day expiry
+        this.themeCookie.set(this.theme && this.theme==="light"? "dark" : "light", { expires: 365 }) // 365 day expiry
     }
 
     unsetTheme = () => {
