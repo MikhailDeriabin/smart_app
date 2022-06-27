@@ -1,0 +1,100 @@
+.navbar{
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+.menuitems{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+}
+.menu{
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+.hamburger_lines{
+    display: none;
+    background-color: transparent;
+    border: 0;
+    height: 48px;
+}
+.menuburger{
+    display: inline-block;
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 1;
+}
+.navbar_container {
+    display: grid;
+    grid-template-columns: max-content auto;
+    grid-template-rows: 1fr;
+    align-items: end;
+    background-color: darkslateblue;
+    text-align: center;
+}
+.title{
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 1;
+}
+.visible{
+    transform: translateX(0);
+}
+.invisible{
+    transform: translate(-150%);
+}
+.navbar_container input[type="checkbox"] {
+    position: relative;
+    display: inline-block;
+    height: 48px;
+    width: 48px;
+    right: 48px;
+    z-index: 99;
+    opacity: 0;
+}
+@media (max-width: 700px) {
+    .hamburger_lines{
+        display: inline-block;
+    }
+    .menuitems{
+        background: #fff;
+        height: 100vh;
+        max-width: 300px;
+        width: 100%;
+        position: fixed;
+        max-width: 300px;
+        display: flex;
+        flex-direction: column;
+        margin-left: -40px;
+        padding-left: 50px;
+        transition: transform 0.5s ease-in-out;
+        box-shadow: 5px 0px 10px 0px #aaa;
+    }
+}@media (max-width: 700px) {
+    .hamburger_lines{
+        display: inline-block;
+    }
+    .menuitems{
+        background: #fff;
+        height: 100vh;
+        max-width: 300px;
+        width: 100%;
+        position: fixed;
+        max-width: 300px;
+        display: flex;
+        flex-direction: column;
+        margin-left: -40px;
+        padding-left: 50px;
+        transition: transform 0.5s ease-in-out;
+        box-shadow: 5px 0px 10px 0px #aaa;
+    }
+}
+[data-theme="dark"] .menuitems{
+    background: black;
+}
