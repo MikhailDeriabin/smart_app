@@ -11,6 +11,7 @@ class LanguageStore {
 
     private _languagesFi = [{value:'EN',name:'Englanti'},{value:"FI",name:"Suomi"}]
 
+
     constructor() {
         makeAutoObservable(this);
     }
@@ -19,7 +20,12 @@ class LanguageStore {
         if (this.language === "EN") {
             return this._languagesEn
         }
-        return this._languagesFi
+        else if(this.language === "FI"){
+            return this._languagesFi
+        }
+        else{
+            return this._languagesEn
+        }
     }
 
 
