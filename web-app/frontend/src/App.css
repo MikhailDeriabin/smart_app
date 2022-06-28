@@ -1,3 +1,5 @@
+@import "styles/Themes.css";
+
 /* https://www.joshwcomeau.com/css/custom-css-reset/ */
 *, *::before, *::after {
     box-sizing: border-box;
@@ -60,18 +62,7 @@ p, h1, h2, h3, h4, h5, h6 {
     }
 }
 
-#light {
-    --color-primary: #0060df;
-    --color-secondary: #fbfbfe;
-    --color-accent: #fd6f53;
-    --font-color: #000000;
-}
-#dark {
-    --color-primary: #17ed90;
-    --color-secondary: #243133;
-    --color-accent: #12cdea;
-    --font-color: #ffffff;
-}
+
 
 /*light/dark mode demonstration*/
 .App{
