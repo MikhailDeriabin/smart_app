@@ -4,7 +4,6 @@ import {
     Entity,
     OneToMany,
     PrimaryColumn,
-    PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
 import {ApiProperty} from "@nestjs/swagger";
@@ -14,7 +13,7 @@ import {Device} from "../../device/entities/device.entity";
 export class Room {
 
     @ApiProperty()
-    @PrimaryGeneratedColumn()
+    @PrimaryColumn()
     id: number;
 
     @ApiProperty()

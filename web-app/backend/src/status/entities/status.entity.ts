@@ -1,11 +1,8 @@
 import {
-    Column,
     CreateDateColumn,
     Entity,
-    JoinTable,
     ManyToMany,
-    OneToMany,
-    PrimaryGeneratedColumn,
+    OneToMany, PrimaryColumn,
     UpdateDateColumn
 } from "typeorm";
 import {ApiProperty} from "@nestjs/swagger";
@@ -16,11 +13,7 @@ import {Type} from "../../type/entities/type.entity";
 export class Status {
 
     @ApiProperty()
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @ApiProperty()
-    @Column()
+    @PrimaryColumn()
     statusName: string;
 
     @ApiProperty()

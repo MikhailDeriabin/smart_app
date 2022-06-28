@@ -1,11 +1,9 @@
 import {
-    Column,
     CreateDateColumn,
     Entity, JoinTable,
     ManyToMany,
     ManyToOne,
-    OneToMany,
-    PrimaryGeneratedColumn,
+    OneToMany, PrimaryColumn,
     UpdateDateColumn
 } from "typeorm";
 import {Device} from "../../device/entities/device.entity";
@@ -17,11 +15,7 @@ import {Status} from "../../status/entities/status.entity";
 export class Type {
 
     @ApiProperty()
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @ApiProperty()
-    @Column()
+    @PrimaryColumn()
     typeName: string;
 
     @ApiProperty()
