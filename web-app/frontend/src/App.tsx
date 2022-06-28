@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Header from "./components/Header";
 import ThemeStore from "./store/ThemeStore";
 import {observer} from "mobx-react-lite";
 import AppRouter from "./components/AppRouter";
@@ -13,7 +12,6 @@ const App = observer( () => {
           <div className="App" id={ThemeStore.theme}>
               <BrowserRouter>
                   <NavBar/>
-                  <Header/>
                   <AppRouter/>
               </BrowserRouter>
 
