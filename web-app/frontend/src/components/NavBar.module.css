@@ -93,8 +93,12 @@
         padding-left: 50px;
         transition: transform 0.5s ease-in-out;
         box-shadow: 5px 0px 10px 0px #aaa;
+        /*the new solution just use variables from styles/themes.css!*/
+        background-color: var(--nav-bg-color);
     }
 }
-[data-theme="dark"] .menuitems{
-    background: black;
-}
+/*[data-theme="dark"] .menuitems{
+    background: var(--color-primary);
+}*/
+
+

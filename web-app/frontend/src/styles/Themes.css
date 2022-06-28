@@ -3,10 +3,21 @@
     --color-secondary: #fbfbfe;
     --color-accent: #fd6f53;
     --font-color: #000000;
+
+    /*navbar component*/
+    --nav-bg-color: #fbfbfe;
+
 }
 #dark {
     --color-primary: #17ed90;
     --color-secondary: #243133;
     --color-accent: #12cdea;
     --font-color: #ffffff;
+
+    /*navbar component*/
+    --nav-bg-color:  #243133;
 }
+
+
+
+
