@@ -5,8 +5,7 @@ import {useTranslation} from "react-i18next";
 
 const ToggleLanguageSelect = observer(() => {
 
-    const { t, i18n } = useTranslation();
-    console.log(i18n)
+    const { i18n } = useTranslation();
 
     return (
         <div>
@@ -14,8 +13,7 @@ const ToggleLanguageSelect = observer(() => {
                 value={LanguageStore.language}
                 onChange={event => {
                     LanguageStore.setLanguage(event.target.value);
-                 /*   i18n.changeLanguage(LanguageStore.language).then(r => console.log(r))*/
-                    i18n.changeLanguage("FI")
+                    i18n.changeLanguage(LanguageStore.language)
                 }}
             >
                 <option disabled value="">Select language</option>

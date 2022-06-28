@@ -11,9 +11,21 @@ class LanguageStore {
         makeAutoObservable(this);
     }
 
-    get languages(){
+    private get languagesEn(){
        return [{value:'EN',name:'English'},{value:"FI",name:"Finnish"}]
     }
+
+   private get languagesFi(){
+        return [{value:'EN',name:'Englanti'},{value:"FI",name:"Suomi"}]
+    }
+
+    get languages(){
+        if (this.language === "EN") {
+            return this.languagesEn
+        }
+        return this.languagesFi
+    }
+
 
     get language() {
         return this.languageCookie.value  ? this.languageCookie.value : "EN";

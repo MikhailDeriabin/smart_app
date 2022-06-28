@@ -1,40 +1,48 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import LanguageStore from "./store/LanguageStore";
+
+const currentLanguage = LanguageStore.language
 
 const resources = {
     EN: {
         translation: {
-            Finnish: "Finnish",
-            English: "English",
+            finnish: "Finnish",
+            english: "English",
             home: "Home",
             exit: "Exit",
             title: "title",
             content: "content here",
             save: "Save",
             count: "Count",
-            settingsTitle: "Hello from settings",
+            settings: "Settings",
             startLoading: "Start Loading",
             stopLoading: "Stop Loading",
             loaded: "loaded",
-            welcome: "welcome"
-
+            welcome: "welcome",
+            profile: "Profile",
+            devices: "Devices",
+            about: "About"
         }
     },
     FI: {
         translation: {
-            Finnish: "Suomi",
-            English: "Englanti",
+            finnish: "Suomi",
+            english: "Englanti",
             home: "Koti",
             exit: "Ulos",
             title: "otsikko",
             content: "sisältö täällä",
             save: "Tallentaa",
             count: "Kreivi",
-            settingsTitle: "Terveisiä asetuksista",
+            settings: "Asetukset",
             startLoading: "Start Lataus",
             stopLoading: "Stop Lataus",
             loaded: "ladattu",
-            welcome: "Tervetuloa"
+            welcome: "Tervetuloa",
+            profile: "Profiili",
+            devices: "Laitteet",
+            about: "About"
         }
     }
 };
@@ -44,7 +52,7 @@ i18n
     .init({
         compatibilityJSON: 'v3',
         resources,
-        lng: "EN",
+        lng: currentLanguage,
         interpolation: {
             escapeValue: false
         }

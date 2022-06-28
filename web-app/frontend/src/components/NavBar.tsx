@@ -2,8 +2,10 @@ import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import { ReactComponent as Menu } from '../img/menu_FILL0_wght400_GRAD0_opsz48.svg'
 import navClasses from './NavBar.module.css';
+import {useTranslation} from "react-i18next";
 
 const NavBar = () => {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
     console.log(visible)
@@ -22,16 +24,16 @@ const NavBar = () => {
                 }
                 <ul className={`${navClasses.menuitems} ` + (visible ? `${navClasses.visible}`: `${navClasses.invisible}`)}>
                     <li onClick={()=>navigate("/profile")}>
-                        Profile
+                        {t('profile')}
                     </li>
                     <li onClick={()=>navigate("/devices")}>
-                        Devices
+                        {t('devices')}
                     </li>
                     <li onClick={()=>navigate("/settings")}>
-                        Settings
+                        {t('settings')}
                     </li>
                     <li onClick={()=>navigate("/about")}>
-                        About
+                        {t('about')}
                     </li>
                 </ul>
             </div>
