@@ -1,7 +1,6 @@
 import React from 'react';
 import ThemeStore from "../store/ThemeStore";
 
-
 const Main = () => {
     return (
         <div>

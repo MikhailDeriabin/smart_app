@@ -1,8 +1,6 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
 
-
-
 const Header = () => {
     const navigate = useNavigate();
     return (
@@ -16,6 +14,7 @@ const Header = () => {
         </div>
     );
 };
+
 export default Header;
 
 
