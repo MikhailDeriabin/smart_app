@@ -5,7 +5,7 @@ import {useTranslation} from "react-i18next";
 
 const ToggleLanguageSelect = observer(() => {
 
-    const { i18n } = useTranslation();
+    const { t,i18n } = useTranslation();
 
     return (
         <div>
@@ -16,7 +16,7 @@ const ToggleLanguageSelect = observer(() => {
                     i18n.changeLanguage(LanguageStore.language)
                 }}
             >
-                <option disabled value="">Select language</option>
+                <option disabled value="">{t("selectLanguage")}</option>
                 {LanguageStore.languages.map(option =>
                     <option key={option.value} value={option.value}>
                         {option.name}

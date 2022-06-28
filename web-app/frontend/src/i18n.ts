@@ -22,7 +22,8 @@ const resources = {
             welcome: "welcome",
             profile: "Profile",
             devices: "Devices",
-            about: "About"
+            about: "About",
+            selectLanguage: "Select language"
         }
     },
     FI: {
@@ -42,7 +43,8 @@ const resources = {
             welcome: "Tervetuloa",
             profile: "Profiili",
             devices: "Laitteet",
-            about: "About"
+            about: "About",
+            selectLanguage: "Valitse kieli"
         }
     }
 };
