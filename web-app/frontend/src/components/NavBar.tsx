@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import { ReactComponent as Menu } from '../img/menu_FILL0_wght400_GRAD0_opsz48.svg'
 import navClasses from './NavBar.module.css';
 
@@ -21,14 +21,17 @@ const NavBar = () => {
                         <div onClick={()=>setVisible(false)} className={navClasses.menu}/> : null
                 }
                 <ul className={`${navClasses.menuitems} ` + (visible ? `${navClasses.visible}`: `${navClasses.invisible}`)}>
-                    <li>
-                        <Link to='/profile'>Profile</Link>
+                    <li onClick={()=>navigate("/profile")}>
+                        Profile
                     </li>
-                    <li>
-                        <Link to='/devices'>Devices</Link>
+                    <li onClick={()=>navigate("/devices")}>
+                        Devices
                     </li>
-                    <li>
-                        <Link to='/about'>About</Link>
+                    <li onClick={()=>navigate("/settings")}>
+                        Settings
+                    </li>
+                    <li onClick={()=>navigate("/about")}>
+                        About
                     </li>
                 </ul>
             </div>
