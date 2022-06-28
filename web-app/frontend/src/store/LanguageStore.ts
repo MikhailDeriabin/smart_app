@@ -5,38 +5,34 @@ import Cookie from 'mobx-cookie';
 class LanguageStore {
 
 
-    private languageCookie = new Cookie('language')
+    private _languageCookie = new Cookie('language')
+
+    private _languagesEn = [{value:'EN',name:'English'},{value:"FI",name:"Finnish"}]
+
+    private _languagesFi = [{value:'EN',name:'Englanti'},{value:"FI",name:"Suomi"}]
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    private get languagesEn(){
-       return [{value:'EN',name:'English'},{value:"FI",name:"Finnish"}]
-    }
-
-   private get languagesFi(){
-        return [{value:'EN',name:'Englanti'},{value:"FI",name:"Suomi"}]
-    }
-
     get languages(){
         if (this.language === "EN") {
-            return this.languagesEn
+            return this._languagesEn
         }
-        return this.languagesFi
+        return this._languagesFi
     }
 
 
     get language() {
-        return this.languageCookie.value  ? this.languageCookie.value : "EN";
+        return this._languageCookie.value  ? this._languageCookie.value : "EN";
     }
 
     setLanguage = (language:string) => {
-        this.languageCookie.set(language,{expires: 365})
+        this._languageCookie.set(language,{expires: 365})
     }
 
     unsetLanguage = () => {
-        this.languageCookie.remove()
+        this._languageCookie.remove()
     }
 
 }
