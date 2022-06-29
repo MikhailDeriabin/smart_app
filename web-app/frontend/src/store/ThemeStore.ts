@@ -3,7 +3,7 @@ import Cookie from 'mobx-cookie';
 
 class ThemeStore {
 
-    private themeCookie = new Cookie('theme')
+    private themeCookie:Cookie = new Cookie('theme')
    /* private setDark = () => {
         localStorage.setItem("theme", "dark");
         document.documentElement.setAttribute("data-theme", "dark");
@@ -18,11 +18,11 @@ class ThemeStore {
         makeAutoObservable(this);
     }
 
-    get theme() {
+    get theme():string {
         return !this.themeCookie.value  ? "light" : this.themeCookie.value;
     }
 
-    setTheme = () => {
+    setTheme = ():void => {
         this.themeCookie.set(this.theme!=null && this.theme==="light"? "dark" : "light", { expires: 365 }) // 365 day expiry
 
       /*  if(this.theme==="light"){
@@ -32,7 +32,7 @@ class ThemeStore {
         }*/
     }
 
-    unsetTheme = () => {
+    unsetTheme = ():void => {
         this.themeCookie.remove()
     }
 

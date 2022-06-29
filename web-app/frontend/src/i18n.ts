@@ -12,12 +12,9 @@ const resources = {
             home: "Home",
             exit: "Exit",
             title: "title",
-            content: "content here",
+            content: "Content",
             save: "Save",
-            count: "Count",
             settings: "Settings",
-            startLoading: "Start Loading",
-            stopLoading: "Stop Loading",
             loaded: "loaded",
             welcome: "welcome",
             profile: "Profile",
@@ -32,21 +29,36 @@ const resources = {
             english: "Englanti",
             home: "Koti",
             exit: "Ulos",
-            title: "otsikko",
-            content: "sisältö täällä",
+            title: "Otsikko",
+            content: "Sisältö",
             save: "Tallentaa",
-            count: "Kreivi",
             settings: "Asetukset",
-            startLoading: "Start Lataus",
-            stopLoading: "Stop Lataus",
-            loaded: "ladattu",
+            loaded: "Ladattu",
             welcome: "Tervetuloa",
             profile: "Profiili",
             devices: "Laitteet",
             about: "About",
             selectLanguage: "Valitse kieli"
         }
-    }
+    },
+    RU: {
+        translation: {
+            finnish: "Финский",
+            english: "Английский",
+            home: "Главная страница",
+            exit: "Выход",
+            title: "Заголовок",
+            content: "Контент",
+            save: "Сохранить",
+            settings: "Настройки",
+            loaded: "Загружено",
+            welcome: "Добро пожаловать",
+            profile: "Профиль",
+            devices: "Устройства",
+            about: "О программе",
+            selectLanguage: "Выберите язык"
+        }
+    },
 };
 
 i18n
