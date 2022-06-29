@@ -10,6 +10,7 @@ const Settings = () => {
             <ToggleThemeButton/>
             <ToggleLanguageSelect/>
             <button onClick={()=>navigate("/")}>Go back</button>
+            <div className="test">hello</div>
         </div>
     );
 };

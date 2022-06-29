@@ -9,6 +9,9 @@ import NavBar from "./components/NavBar";
 
 const App = observer( () => {
 
+
+    document.documentElement.setAttribute("data-theme", ThemeStore.theme);
+
     return (
           <div className="App" id={ThemeStore.theme}>
               <BrowserRouter>

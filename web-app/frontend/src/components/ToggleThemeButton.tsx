@@ -5,7 +5,9 @@ import ThemeStore from "../store/ThemeStore";
 const ToggleThemeButton = observer( () => {
     return (
         <div>
-            <button onClick={()=>ThemeStore.setTheme() }>
+            <button onClick={()=>{
+                ThemeStore.setTheme()
+            } }>
                 {
                     ThemeStore.theme === "light" ? "Light mode" : "Dark Mode"
                 }

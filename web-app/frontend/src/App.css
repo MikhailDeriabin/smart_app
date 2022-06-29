@@ -64,6 +64,7 @@ p, h1, h2, h3, h4, h5, h6 {
 
 
 
+
 /*light/dark mode demonstration*/
 .App{
     background-color: var(--color-primary);
@@ -73,6 +74,13 @@ p, h1, h2, h3, h4, h5, h6 {
 .testElement {
     background-color: var(--color-secondary);
 }
+
+/*[data-theme="light"] {
+    test-color:  #243133;
+}
+.test{
+    background-color: var(--test-color);
+}*/
 
 
 

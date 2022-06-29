@@ -24,8 +24,8 @@ class ThemeStore {
 
     setTheme = () => {
         this.themeCookie.set(this.theme!=null && this.theme==="light"? "dark" : "light", { expires: 365 }) // 365 day expiry
-/*
-        if(this.theme==="light"){
+
+      /*  if(this.theme==="light"){
             this.setLight();
         } else {
             this.setDark();
