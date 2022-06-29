@@ -13,7 +13,7 @@ const ToggleLanguageSelect = observer(() => {
                 value={LanguageStore.language}
                 onChange={event => {
                     LanguageStore.setLanguage(event.target.value);
-                    i18n.changeLanguage(LanguageStore.language)
+                    i18n.changeLanguage(event.target.value);
                 }}
             >
                 <option disabled value="">{t("selectLanguage")}</option>
