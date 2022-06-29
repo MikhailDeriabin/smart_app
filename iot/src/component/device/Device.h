@@ -2,14 +2,17 @@
 #define DEVICE_H
 
 #include "../Component.h"
+#include "../Status.h"
 
 class Device : public Component{
-
+protected:
+    Status status;
 public:
     Device(int pinNumber);
     virtual void turnOn() = 0;
     virtual void turnOff() = 0;
-    char * toString() override;
+    Status getStatus();
+    void setStatus(Status status);
 };
 
 #endif
