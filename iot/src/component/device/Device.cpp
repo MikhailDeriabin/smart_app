@@ -4,8 +4,6 @@
 
 Device::Device(int pinNumber) : Component(pinNumber){
     pinMode(pinNumber, OUTPUT);
-}
-
-char * Device::toString(){
-    return "Device object";
+    this->status = OFF;
+    Component::name = "Device";
 }

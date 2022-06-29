@@ -9,8 +9,6 @@
  * The class extends abstract class Device.
  */
 class Lamp : public Device{
-private:
-    bool isOn;
 public: 
     /**
      * @brief Construct a new Lamp object.

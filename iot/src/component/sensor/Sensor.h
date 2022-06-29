@@ -9,7 +9,6 @@ private:
 public:
     Sensor(int pinNumber);
     virtual float getValue() = 0;
-    char * toString() override;
 };
 
 #endif

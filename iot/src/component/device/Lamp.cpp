@@ -1,31 +1,36 @@
+#include "Arduino.h"
 #include "Lamp.h"
 #include "Device.h"
-#include "Arduino.h"
+#include "../Status.h"
 
-Lamp::Lamp(int pinMode) : Device(pinMode){}
+Lamp::Lamp(int pinMode) : Device(pinMode){
+    Component::name = "Lamp";
+}
 
 void Lamp::turnOn(){
-    if(!isOn){
+    if(status != ON){
         digitalWrite(pinNumber, HIGH);
-        isOn = true;
+        status = ON;
     }       
 }
 
 void Lamp::turnOff(){
-    if(isOn){
+    if(status != OFF){
         digitalWrite(pinNumber, LOW);
-        isOn = false;
+        status = OFF;
     }
     
 }
 
 void Lamp::pulse(float interval){
-    //Can not see blinking if the inteval is below 20
+    if(status != PULSE)
+        status = PULSE;
+    //Can not see blinking if the inteval is below 20 ms
     if(interval < 20)
         interval = 20;
 
-    turnOn();
+    digitalWrite(pinNumber, HIGH);
     delay(interval);
-    turnOff();
+    digitalWrite(pinNumber, LOW);
     delay(interval);
 }

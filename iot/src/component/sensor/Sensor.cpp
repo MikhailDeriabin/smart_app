@@ -4,8 +4,5 @@
 
 Sensor::Sensor(int pinNumber) : Component(pinNumber){
     pinMode(pinNumber, INPUT);
-}
-
-char * Sensor::toString(){
-    return "Sensor object";
+    Component::name = "Sensor";
 }
