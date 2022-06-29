@@ -1,4 +1,3 @@
-import React from 'react';
 import ToggleThemeButton from "../components/ToggleThemeButton";
 import {useNavigate} from "react-router-dom";
 import ToggleLanguageSelect from "../components/ToggleLanguageSelect";

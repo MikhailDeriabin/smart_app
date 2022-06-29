@@ -1,4 +1,3 @@
-import React from 'react';
 import './App.css';
 import ThemeStore from "./store/ThemeStore";
 import {observer} from "mobx-react-lite";
