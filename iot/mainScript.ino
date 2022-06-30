@@ -1,28 +1,51 @@
 #include "src/component/device/Lamp.h"
-#include "src/component/manager/Manager.h"
+#include "src/component/manager/Switch.h"
+#include "src/component/sensor/DHTSensor.h"
 
 //define components that will be used in the sketch
-Lamp lamp(2);
+Switch mainSwitch(2);
+DHTSensor tempHumSensor(3);
+Lamp humidityLamp(4);
+Lamp temperatureLamp(5);
 
-void setup() {  
-    Lamp lamp3(3);
-    Lamp lamp4(4);
-    lamp4.setName("main lamp");
-    Lamp lamp5(5);
+bool wasTurnedOn = false;
 
-    Component lamps[] = {lamp3, lamp4, lamp5};
-    Manager manager(6);
-    manager.setComponents(lamps);
-
+void setup() {
     Serial.begin(9600);
-
-    Component* components = manager.getComponents();
-    
-    Serial.println(components[0].toString());
-    Serial.println(components[1].toString());
-    Serial.println(components[2].toString());
 }
 
 void loop() {
-    //lamp.pulse(500);
+    if(mainSwitch.isOn()){
+        if(!wasTurnedOn){
+            Serial.println("Measurements has been started");
+            wasTurnedOn = true;
+        }
+        
+        float currentHumidity = tempHumSensor.getHumidity();
+        float currentTemperature = tempHumSensor.getTemerature();
+
+        if(currentHumidity > 60){
+            humidityLamp.turnOn();
+            Serial.print(currentHumidity);
+            Serial.println("%. Warning: Hight humidity!");
+        } else{
+            humidityLamp.turnOff();
+        }
+
+        if(currentTemperature > 30){
+            temperatureLamp.turnOn();
+            Serial.print(currentTemperature);
+            Serial.println("C. Warning: Hight temperature!");
+        } else{
+            temperatureLamp.turnOff();
+        }
+    } else if(wasTurnedOn){
+        humidityLamp.turnOff();
+        temperatureLamp.turnOff();
+
+        wasTurnedOn = false;
+        Serial.println("Measurements has been paused");      
+    }
+
+    delay(1000);
 }
