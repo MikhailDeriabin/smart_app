@@ -3,6 +3,8 @@
 
 Switch::Switch(int pinNumber) : pinNumber(pinNumber){
     Component::name = "Switch";
+    int pins [] = {pinNumber};
+    Component::setPinMode(pins, INPUT);
 }
 
 Switch::Switch(int pinNumber, Component components[]) : Manager(components), pinNumber(pinNumber){
