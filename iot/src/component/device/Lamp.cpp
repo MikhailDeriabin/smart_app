@@ -3,7 +3,7 @@
 #include "Device.h"
 #include "../Status.h"
 
-Lamp::Lamp(int pinMode) : Device(pinMode){
+Lamp::Lamp(int pinNumber) : pinNumber(pinNumber){
     Component::name = "Lamp";
 }
 

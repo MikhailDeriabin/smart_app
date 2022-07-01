@@ -8,7 +8,7 @@ class Device : public Component{
 protected:
     Status status;
 public:
-    Device(int pinNumber);
+    Device();
     virtual void turnOn() = 0;
     virtual void turnOff() = 0;
     Status getStatus();

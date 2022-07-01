@@ -5,8 +5,9 @@
 #include "DHT.h"
 
 class DHTSensor : public Sensor{
-    private:
-     DHT* dht;
+private:
+    DHT* dht;
+    const int pinNumber;
 public:
     DHTSensor(int pinNumber);
     DHTSensor(int pinNumber, uint8_t updatingInterval);

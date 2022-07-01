@@ -1,23 +1,23 @@
-#ifndef LAMP_H
-#define LAMP_H
+#ifndef RGBLAMP_H
+#define RGBLAMP_H
 
 #include "Device.h"
 
 /**
- * @brief The class represents LED lamp.
- * The class has methods for manipulating with LED DC lamps.
+ * @brief The class represents RGB Lamp lamp.
+ * The class has methods for manipulating with LED RGB DC lamps.
  * The class extends abstract class Device.
  */
-class Lamp : public Device{
+class RGBLamp : public Device{
 private:
     const int pinNumber;
 public: 
     /**
-     * @brief Construct a new Lamp object.
+     * @brief Construct a new RGBLamp object.
      * 
      * @param pinNumber pin number where lamp is attached
      */
-    Lamp(int pinNumber);
+    RGBLamp(int pinNumber);
 
     /**
      * @brief The method make a pulse signal(turn on -> turn off) with the given interval.

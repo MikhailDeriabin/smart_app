@@ -1,12 +1,8 @@
+#include "Arduino.h"
 #include "Component.h"
 
-Component::Component(int pinNumber) : pinNumber(pinNumber){
-    pinNumber = pinNumber;
+Component::Component(){
     this->name = "Component";
-}
-
-int Component::getPinNumber(){
-    return pinNumber;
 }
 
 char* Component::getName(){
@@ -18,4 +14,11 @@ void Component::setName(char name[]){
 
 char* Component::toString(){
     return this->name;
+}
+
+void Component::setPinMode(int pinNumbers[], int modeToSet){   
+    int arrLength = sizeof(pinNumbers)/sizeof(*pinNumbers);
+    for(int i=0; i<arrLength; i++){
+        pinMode(pinNumbers[i], modeToSet);
+    }
 }

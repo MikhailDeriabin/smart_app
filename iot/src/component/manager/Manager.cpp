@@ -2,15 +2,11 @@
 #include "Manager.h"
 #include "../Status.h"
 
-Manager::Manager(int pinNumber) : Component(pinNumber){
-    pinMode(pinNumber, INPUT);
-    
+Manager::Manager(){ 
     this->status = OFF;
     Component::name = "Manager";
 }
-Manager::Manager(int pinNumber, Component components[]) : Component(pinNumber){
-    pinMode(pinNumber, INPUT);
-
+Manager::Manager(Component components[]){
     this->status = OFF;
     this->components = components;
     Component::name = "Manager";

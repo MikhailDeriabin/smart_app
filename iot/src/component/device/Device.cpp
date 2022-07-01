@@ -2,8 +2,7 @@
 #include "../Component.h"
 #include "Arduino.h"
 
-Device::Device(int pinNumber) : Component(pinNumber){
-    pinMode(pinNumber, OUTPUT);
+Device::Device() : Component(){
     this->status = OFF;
     Component::name = "Device";
 }

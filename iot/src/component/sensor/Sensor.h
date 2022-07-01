@@ -5,7 +5,7 @@
 
 class Sensor : public Component{
 public:
-    Sensor(int pinNumber);
+    Sensor();
 };
 
 #endif

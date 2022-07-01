@@ -3,12 +3,11 @@
 
 class Component{
 protected:
-    const int pinNumber;
     char* name;
+    void setPinMode(int pinNumbers[], int modeToSet);
 public:
-    Component(int pinNumber);
-
-    int getPinNumber();
+    Component();
+   
     char* getName();
     void setName(char name[]);
     virtual char* toString();

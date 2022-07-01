@@ -9,8 +9,8 @@ protected:
     Status status;
     Component* components;
 public:
-    Manager(int pinNumber);
-    Manager(int pinNumber, Component components[]);
+    Manager();
+    Manager(Component components[]);
 
     Status getStatus();
     void setStatus(Status status);

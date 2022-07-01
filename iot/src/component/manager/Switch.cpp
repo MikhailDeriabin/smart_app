@@ -1,11 +1,11 @@
 #include "Arduino.h"
 #include "Switch.h"
 
-Switch::Switch(int pinNumber) : Manager(pinNumber){
+Switch::Switch(int pinNumber) : pinNumber(pinNumber){
     Component::name = "Switch";
 }
 
-Switch::Switch(int pinNumber, Component components[]) : Manager(pinNumber, components){
+Switch::Switch(int pinNumber, Component components[]) : Manager(components), pinNumber(pinNumber){
     Component::name = "Switch";
 }
 

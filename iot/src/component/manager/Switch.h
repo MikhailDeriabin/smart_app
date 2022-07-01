@@ -4,6 +4,8 @@
 #include "Manager.h"
 
 class Switch : public Manager{
+private:
+    const int pinNumber;
 public:
     Switch(int pinNumber);
     Switch(int pinNumber, Component components[]);

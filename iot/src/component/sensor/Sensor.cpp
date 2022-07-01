@@ -2,7 +2,6 @@
 #include "../Component.h"
 #include "Sensor.h"
 
-Sensor::Sensor(int pinNumber) : Component(pinNumber){
-    pinMode(pinNumber, INPUT);
+Sensor::Sensor() {
     Component::name = "Sensor";
 }
