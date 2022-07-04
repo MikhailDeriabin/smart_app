@@ -40,12 +40,13 @@ public:
      */
     void pulse(float interval);
 
-    void setIntensivity(float intensivity, bool write=false);
-    void setRedIntensivity(float intensivity, bool write=false);
-    void setGreenIntensivity(float intensivity, bool write=false);
-    void setBlueIntensivity(float intensivity, bool write=false);
+    void setIntensivity(uint8_t intensivity, bool write=false);
+    void setRedIntensivity(uint8_t intensivity, bool write=false);
+    void setGreenIntensivity(uint8_t intensivity, bool write=false);
+    void setBlueIntensivity(uint8_t intensivity, bool write=false);
     
-    void setColor(float redIntensivity, float greenIntensivity, float blueIntensivity, bool write=false);    
+    void setColor(uint8_t redIntensivity, uint8_t greenIntensivity, uint8_t blueIntensivity, bool write=false);    
+    void setBrightness(float brightness, bool write=false);
 };
 
 #endif

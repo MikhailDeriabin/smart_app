@@ -12,17 +12,10 @@ class Lamp : public Device{
 private:
     const int pinNumber;
     const bool isPinAnalog;
-    float intensivity;
-public: 
-    /**
-     * @brief Construct a new Lamp object.
-     * 
-     * @param pinNumber pin number where lamp is attached
-     */
-    Lamp(int pinNumber);
-    Lamp(int pinNumber, bool isPinAnalog);
-    //for analog pin only
-    Lamp(int pinNumber, bool isPinAnalog, float intensivity);
+    uint8_t intensivity;
+    float brightness;
+public:
+    Lamp(int pinNumber, bool isPinAnalog=false, uint8_t intensivity=255, float brightness=1);
 
     /**
      * @brief The method make a pulse signal(turn on -> turn off) with the given interval.
@@ -41,11 +34,14 @@ public:
      */
     void turnOff() override;
 
-    void increaseIntensivity(float intensivity, bool write=false);
-    void decreaseIntensivity(float intensivity, bool write=false);
+    void increaseIntensivity(uint8_t intensivity, bool write=false);
+    void decreaseIntensivity(uint8_t intensivity, bool write=false);
 
-    void setIntensivity(float intensivity, bool write=false);
-    float getIntensivity();
+    void setIntensivity(uint8_t intensivity, bool write=false);
+    uint8_t getIntensivity();
+
+    void setBrightness(float brightness, bool write=false);
+    float getBrightness();
 };
 
 #endif

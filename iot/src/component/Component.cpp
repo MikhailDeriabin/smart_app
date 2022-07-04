@@ -19,6 +19,6 @@ char* Component::toString(){
 void Component::setPinMode(int pinNumbers[], int modeToSet){   
     int arrLength = sizeof(pinNumbers)/sizeof(*pinNumbers);
     for(int i=0; i<arrLength; i++){
-        pinMode(pinNumbers[i], modeToSet);
+        pinMode(pinNumbers[i], OUTPUT);
     }
 }
