@@ -4,7 +4,10 @@
 enum Status {
     ON,
     OFF,
-    PULSE
+    PULSE,
+    SPIN_CLOCKWISE,
+    SPIN_COUNTERCLOCKWISE,
+    STOP_SPIN
 };
 
 #endif

@@ -1,23 +1,24 @@
-#include "src/component/sensor/LDP.h"
+#include "src/component/device/MotorL293D.h"
 
-LDP lightSensor(2);
+MotorL293D motorController(2, 3, 4, 5, 6, 7);
 
 void setup() {
     Serial.begin(9600);
+    motorController.turnOn(MotorL293D::B);
 }
 
-int i = 0;
-
 void loop() {
-    bool isDark = lightSensor.isDark();
-
-    if(isDark)
-        Serial.println("It is dark");
-    else
-        Serial.println("It is light");
-
-    Serial.print("The value is ");
-    Serial.println(lightSensor.getValue());
-
-    delay(1000);
+    motorController.turnOn(MotorL293D::B);
+    Serial.println("Clockwise");
+    motorController.spinClock(MotorL293D::B); 
+    delay(5000);
+    Serial.println("Stop");
+    motorController.stopSpin(MotorL293D::B);
+    delay(2000);
+    Serial.println("Counterclockwise");
+    motorController.changeDirection(MotorL293D::B);
+    delay(5000);
+    Serial.println("Turned off");
+    motorController.turnOff(MotorL293D::B);    
+    delay(2000);
 }
