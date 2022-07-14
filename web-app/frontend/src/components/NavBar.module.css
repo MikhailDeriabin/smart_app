@@ -58,25 +58,7 @@
     z-index: 99;
     opacity: 0;
 }
-@media (max-width: 700px) {
-    .hamburger_lines{
-        display: inline-block;
-    }
-    .menuitems{
-        background: #fff;
-        height: 100vh;
-        max-width: 300px;
-        width: 100%;
-        position: fixed;
-        max-width: 300px;
-        display: flex;
-        flex-direction: column;
-        margin-left: -40px;
-        padding-left: 50px;
-        transition: transform 0.5s ease-in-out;
-        box-shadow: 5px 0px 10px 0px #aaa;
-    }
-}@media (max-width: 700px) {
+@media (max-width: 1200px) {
     .hamburger_lines{
         display: inline-block;
     }
