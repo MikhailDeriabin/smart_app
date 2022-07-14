@@ -12,11 +12,20 @@
     display: flex;
     flex-direction: row;
 }
-.menu{
+.menu_Background{
     background: rgba(0, 0, 0, 0.5);
     position: fixed;
     width: 100%;
     height: 100%;
+}
+.menu{
+    position: fixed;
+    max-width: 30%;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+    /*the new solution just use variables from styles/themes.css!*/
+    background-color: var(--nav-bg-color);
 }
 .hamburger_lines{
     display: none;
@@ -49,56 +58,29 @@
 .invisible{
     transform: translate(-150%);
 }
-.navbar_container input[type="checkbox"] {
-    position: relative;
-    display: inline-block;
-    height: 48px;
-    width: 48px;
-    right: 48px;
-    z-index: 99;
-    opacity: 0;
+.menuitems li {
+    /*border-bottom: rgba(0, 0, 0, 0.15) solid 1px;*/
+    cursor: pointer;
+    margin: 0.5em 0.5em 0.5em 0em;
 }
-@media (max-width: 700px) {
+.separator{
+    height: 1px;
+    background-color: #1a1a1a;
+    margin: 1em 0.5em 1em 0em;
+}
+.version{
+    text-align: center;
+    color: rgba(121, 121, 121, 0.49);
+}
+@media (min-width: 0px) {
     .hamburger_lines{
         display: inline-block;
     }
     .menuitems{
-        background: #fff;
-        height: 100vh;
-        max-width: 300px;
-        width: 100%;
-        position: fixed;
-        max-width: 300px;
         display: flex;
         flex-direction: column;
         margin-left: -40px;
         padding-left: 50px;
-        transition: transform 0.5s ease-in-out;
-        box-shadow: 5px 0px 10px 0px #aaa;
-    }
-}@media (max-width: 700px) {
-    .hamburger_lines{
-        display: inline-block;
-    }
-    .menuitems{
-        background: #fff;
-        height: 100vh;
-        max-width: 300px;
-        width: 100%;
-        position: fixed;
-        max-width: 300px;
-        display: flex;
-        flex-direction: column;
-        margin-left: -40px;
-        padding-left: 50px;
-        transition: transform 0.5s ease-in-out;
-        box-shadow: 5px 0px 10px 0px #aaa;
-        /*the new solution just use variables from styles/themes.css!*/
-        background-color: var(--nav-bg-color);
     }
 }
-/*[data-theme="dark"] .menuitems{
-    background: var(--color-primary);
-}*/
-
 

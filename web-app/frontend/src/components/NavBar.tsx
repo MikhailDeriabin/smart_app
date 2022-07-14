@@ -17,26 +17,31 @@ const NavBar = () => {
                 </button>
                 <h1 className={navClasses.title}>Smart App</h1>
             </div>
-            <div>
                 {
                     visible ?
-                        <div onClick={()=>setVisible(false)} className={navClasses.menu}/> : null
+                        <div onClick={()=>setVisible(false)} className={navClasses.menu_Background}/> : null
                 }
-                <ul className={`${navClasses.menuitems} ` + (visible ? `${navClasses.visible}`: `${navClasses.invisible}`)}>
-                    <li onClick={()=>navigate("/profile")}>
-                        {t('profile')}
-                    </li>
-                    <li onClick={()=>navigate("/devices")}>
-                        {t('devices')}
-                    </li>
-                    <li onClick={()=>navigate("/settings")}>
-                        {t('settings')}
-                    </li>
-                    <li onClick={()=>navigate("/about")}>
-                        {t('about')}
-                    </li>
-                </ul>
-            </div>
+                <div className={`${navClasses.menu} ` + (visible ? `${navClasses.visible}`: `${navClasses.invisible}`)}>
+                    <ul className={navClasses.menuitems}>
+                        <li onClick={()=>navigate("/")}>
+                            {t('home')}
+                        </li>
+                        <li onClick={()=>navigate("/devices")}>
+                            {t('devices')}
+                        </li>
+                        <li onClick={()=>navigate("/groups")}>
+                            {t('groups')}
+                        </li>
+                        <div className={navClasses.separator}/>
+                        <li onClick={()=>navigate("/settings")}>
+                            {t('settings')}
+                        </li>
+                        <li onClick={()=>navigate("/about")}>
+                            {t('about')}
+                        </li>
+                    </ul>
+                    <p className={navClasses.version}>version Alpha 0.1.0</p>
+                </div>
         </nav>
     );
 };
