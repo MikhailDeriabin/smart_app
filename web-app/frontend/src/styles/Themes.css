@@ -1,21 +1,26 @@
 #light {
-    --color-primary: #4288ff;
+    --color-primary: #398AB9;
+    --color-primary-variant: #1C658C;
     --color-secondary: #fbfbfe;
     --color-accent: #fd6f53;
-    --font-color: #000000;
+
+    --font-primary-color: #ffffff;
+    --font-secondary-color: #000000;
 
     /*navbar component*/
     --nav-bg-color: #fbfbfe;
 
 }
 #dark {
-    --color-primary: #483d8b;
-    --color-secondary: #243133;
+    --color-primary: #3c3f41;
+    --color-primary-variant: #2b2b2b;
+    --color-secondary: #afafaf;
     --color-accent: #12cdea;
-    --font-color: #ffffff;
+    --font-primary-color: #bbbbbb;
+    --font-secondary-color: #000000;
 
     /*navbar component*/
-    --nav-bg-color:  #243133;
+    --nav-bg-color: #243133;
 }
 
 

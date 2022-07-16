@@ -67,8 +67,8 @@ p, h1, h2, h3, h4, h5, h6 {
 
 /*light/dark mode demonstration*/
 .App{
-    background-color: var(--color-primary);
-    color: var(--font-color);
+    background-color: var(--color-primary-variant);
+    color: var(--font-primary-color);
 }
 
 .testElement {
