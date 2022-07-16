@@ -12,7 +12,10 @@
     "mariadb": "^3.0.0",
     "sqlite3": "^5.0.8"
   },
-  "scripts": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "dev": "(cd web-app/frontend && npm run start) & npm run start"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MikhailDeriabin/smart_app.git"

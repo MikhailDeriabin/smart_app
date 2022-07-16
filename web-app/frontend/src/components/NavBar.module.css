@@ -26,7 +26,7 @@
     height: 100%;
     transition: transform 0.5s ease-in-out;
     /*the new solution just use variables from styles/themes.css!*/
-    background-color: var(--nav-bg-color);
+    background-color: var(--color-secondary);
 }
 .hamburger_lines{
     display: none;
@@ -45,7 +45,7 @@
     grid-template-columns: max-content auto;
     grid-template-rows: 1fr;
     align-items: end;
-    background-color: darkslateblue;
+    background-color: var(--color-primary);
     text-align: center;
 }
 .title{
@@ -59,20 +59,24 @@
 .invisible{
     transform: translate(-150%);
 }
+
 .menuitems li {
     /*border-bottom: rgba(0, 0, 0, 0.15) solid 1px;*/
     display: flex;
-    align-items:center;
+    align-items: center;
     cursor: pointer;
     margin: 0.5em 0.5em 0.5em 0em;
+    color: var(--font-secondary-color);
 }
-li img{
+
+.icons {
     display: inline-block;
     height: 1.5em;
-    vertical-align:middle
-
+    width: 1.5em;
+    vertical-align: middle
 }
-.separator{
+
+.separator {
     height: 1px;
     background-color: #1a1a1a;
     margin: 1em 0.5em 1em 0em;
