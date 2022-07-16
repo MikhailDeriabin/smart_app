@@ -5,6 +5,7 @@
     --color-accent: #fd6f53;
 
     --font-primary-color: #ffffff;
+    --font-primary-variant-color: #c4c4c4;
     --font-secondary-color: #000000;
 
     /*navbar component*/
@@ -17,6 +18,7 @@
     --color-secondary: #afafaf;
     --color-accent: #12cdea;
     --font-primary-color: #bbbbbb;
+    --font-primary-variant-color: #8d8d8d;
     --font-secondary-color: #000000;
 
     /*navbar component*/
