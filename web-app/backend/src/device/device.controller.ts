@@ -9,7 +9,7 @@ export class DeviceController {
 
   @Post()
   create(@Body() createDeviceDto: CreateDeviceDto) {
-    return this.deviceService.create(createDeviceDto);
+    return this.deviceService.insertDevice(createDeviceDto);
   }
 
   @Get()
