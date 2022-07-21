@@ -27,7 +27,7 @@ export class Device {
 
     @ApiProperty()
     @Column()
-    deviceConsumption: string;
+    deviceConsumption: number;
 
     @ApiProperty()
     @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
