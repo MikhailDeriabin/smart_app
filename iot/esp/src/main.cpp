@@ -2,33 +2,39 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 
-// Replace the next variables with your SSID/Password combination
+#include "Lamp.h"
+#include "Status.h"
+#include "CommandValue.h"
+#include "Component.h"
+#include "Converter.h"
+#include "Util.h"
+
 const char* ssid = "ASUS_28";
 const char* password = "228asus228";
 
-// Add your MQTT Broker IP address, example:
-//const char* mqtt_server = "192.168.1.144";
 const char* mqtt_server = "192.168.50.93";
 const int mqtt_port = 1884;
-const char *topic = "esp32/output";
-
-WiFiClient espClient;
-PubSubClient client(espClient);
-
-const int ledPin = 5;
+const char* topic = "esp8266/1";
 
 void setup_wifi();
 void callback(char *topic, byte *payload, unsigned int length);
 
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+//Components
+Lamp lamp(5);
+
 void setup() {
   Serial.begin(9600); 
+  
   delay(10);
   setup_wifi();
 
   client.setServer(mqtt_server, mqtt_port);
   client.setCallback(callback);
   while (!client.connected()) {
-    String client_id = "esp8266-client-";
+    String client_id = "esp8266-";
     client_id += String(WiFi.macAddress());
 
     Serial.printf("The client %s connects to mosquitto mqtt broker\n", client_id.c_str());
@@ -42,10 +48,8 @@ void setup() {
     }   
   }
 
-  client.publish(topic, "Hello From ESP8266!");
+  client.publish(topic, "ESP8266 connected!");
   client.subscribe(topic);
-
-  pinMode(ledPin, OUTPUT);
 }
 
 void setup_wifi() {
@@ -66,20 +70,46 @@ void setup_wifi() {
 }
 
 void callback(char *topic, byte *payload, unsigned int length) {
-  String msg;
+  Converter converter;
+  Util util;
+  char msg[length];
   Serial.print("Message:");
   for (int i = 0; i < length; i++) {
     Serial.print((char) payload[i]);
-    msg += (char) payload[i];
+    msg[i] = (char) payload[i];
   }
   Serial.println();
   Serial.println(" - - - - - - - - - - - -");
 
-  if(String(topic) == "esp32/output"){
-    if(msg == "on"){
-      digitalWrite(ledPin, HIGH);
-    } else if(msg == "off"){
-      digitalWrite(ledPin, LOW);
+
+  if(String(topic) == "esp8266/1"){   
+    int separatorIndex = -1;
+    for (int i = 0; i < length; i++) {
+      if(msg[i] == ';')
+        separatorIndex = i;
+    }
+
+    char statusValue[separatorIndex];
+    util.splitCharArr(msg, statusValue, 0, separatorIndex-1);
+    Status status = static_cast<Status>(converter.charArrToInt(statusValue, sizeof(statusValue)/sizeof(statusValue[0])));
+
+    if(separatorIndex < length-1){
+      int valueArrSize = length-separatorIndex;
+      char value[valueArrSize];
+      util.splitCharArr(msg, value, separatorIndex+1, length-1);
+
+      //get value MapArr size
+      int valueMapArrSize = 0;
+      if(value[valueArrSize-1] != ',')
+          valueMapArrSize++;
+      for(int i=0; i<valueArrSize; i++){
+          if(value[i] == ',')
+              valueMapArrSize++;
+      }
+
+      lamp.giveCommand(status, value, length-separatorIndex);
+    } else{
+      lamp.giveCommand(status, nullptr, 0);
     }
   }
 }

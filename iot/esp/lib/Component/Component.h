@@ -1,7 +1,8 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
-#include "Status.h"
+#include <Status.h>
+#include <CommandValue.h>
 
 class Component{
 protected:
@@ -12,7 +13,7 @@ protected:
 public:
     Component();
    
-    virtual void giveCommand(Status status, char value[]=NULL) = 0;
+    virtual void giveCommand(Status status, char* value, int valueSize) = 0;
 
     int getId();
     void setId(int id);

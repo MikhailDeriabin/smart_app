@@ -2,10 +2,10 @@
 #define STATUS_H
 
 enum Status {
-    ON,
-    OFF,
+    ON=0,
+    OFF=1,
 
-    PULSE,
+    PULSE=2,
     SET_BRIGHTNESS,
     SET_INTENSIVITY,
     SET_COLOR,

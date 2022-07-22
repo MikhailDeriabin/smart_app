@@ -1,8 +1,11 @@
 #ifndef RGBLAMP_H
 #define RGBLAMP_H
 
-#include "Device.h"
-#include "Lamp.h"
+#include <Device.h>
+#include <Lamp.h>
+#include <HashMap.h>
+#include <CommandValue.h>
+#include <CmdValKeyHash.h>
 
 /**
  * @brief The class represents RGB Lamp lamp.
@@ -23,7 +26,7 @@ public:
      */
     RGBLamp(int redPinNumber, int greenPinNumber, int bluePinNumber);
 
-    void giveCommand(Status status, char value[]=NULL) override;
+    void giveCommand(Status status, HashMap<CommandValue, char*, 20, CmdValKeyHash> values) override;
 
     /**
      * @brief The method turn the lamp on.

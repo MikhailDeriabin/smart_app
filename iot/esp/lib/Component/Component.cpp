@@ -1,6 +1,6 @@
 #include "Arduino.h"
-#include "Component.h"
-#include "Status.h"
+#include <Component.h>
+#include <Status.h>
 
 Component::Component(){
     this->name = "Component";
