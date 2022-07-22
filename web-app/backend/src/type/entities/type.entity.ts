@@ -35,9 +35,14 @@ export class Type {
     @OneToMany(() => Device, (device) => device.type)
     devices?: Device[];
 
-    @ApiProperty({ type: () => Manufacturer })
+  /*  @ApiProperty({ type: () => Manufacturer })
     @ManyToOne(() => Manufacturer, (manufacturer) => manufacturer.types)
-    manufacturer: Manufacturer;
+    manufacturer: Manufacturer;*/
+
+    @ApiProperty({ type: () => Manufacturer })
+    @ManyToMany(() => Manufacturer, (manufacturer) => manufacturer.types, )
+    manufacturers: Manufacturer[];
+
 
     @ApiProperty({ type: () => Status })
     @ManyToMany(() => Status, (status) => status.types, { cascade: true })
