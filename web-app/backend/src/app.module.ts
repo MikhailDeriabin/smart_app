@@ -25,7 +25,7 @@ import { StatusModule } from './status/status.module';
       autoLoadEntities: true,
      // entities: [Test],
       // we should not use it in the production
-      synchronize: false,
+      synchronize: true,
     }),UsersModule, DeviceModule, ManufacturerModule, TypeModule, DeviceGroupModule, RoomModule, StatusModule,
   ],
   controllers: [AppController],

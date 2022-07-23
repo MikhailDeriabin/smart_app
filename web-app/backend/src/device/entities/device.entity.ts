@@ -23,11 +23,11 @@ export class Device {
 
     @ApiProperty()
     @Column({ unique: true })
-    deviceName?: string;
+    deviceName: string;
 
     @ApiProperty()
     @Column()
-    deviceConsumption: number;
+    deviceConsumption?: number;
 
     @ApiProperty()
     @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
@@ -43,7 +43,7 @@ export class Device {
 
     @ApiProperty({ type: () => Status })
     @ManyToOne(() => Status, (status) => status.devices)
-    status: Status;
+    status?: Status;
 
     @ApiProperty({ type: () => Type })
     @ManyToOne(() => Type, (type) => type.devices)
@@ -51,10 +51,10 @@ export class Device {
 
     @ApiProperty({ type: () => DeviceGroup })
     @ManyToOne(() => DeviceGroup, (deviceGroup) => deviceGroup.devices)
-    deviceGroup: DeviceGroup;
+    deviceGroup?: DeviceGroup;
 
     @ApiProperty({ type: () => Room})
     @ManyToOne(() => Room, (room) => room.devices)
-    room: Room;
+    room?: Room;
 
 }
