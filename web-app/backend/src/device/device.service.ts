@@ -74,8 +74,29 @@ export class DeviceService {
         return await this.deviceRepository.findOne({where: {deviceName: deviceName}});
     }
 
-    async update(id: number, updateDeviceDto: UpdateDeviceDto) {
-        return await `This action updates a #${id} device`;
+    async update(id: string, updateDeviceDto: UpdateDeviceDto): Promise<Device> {
+        const updatedDevice = await this.findDeviceById(id);
+        await this.remove(id);
+
+        const updatedDeviceName = updateDeviceDto.deviceName;
+        const updatedDeviceGroup = await this.deviceGroupService.findDeviceGroupByName(updateDeviceDto.deviceGroup);
+        const updatedRoom = await this.roomService.findRoomByName(updateDeviceDto.room);
+        const updatedStatus = await this.statusService.findStatusByName(updateDeviceDto.status)
+
+        if(updatedDeviceName!=null){
+            updatedDevice.deviceName = updatedDeviceName
+        }
+        if(updatedDeviceGroup!=null){
+            updatedDevice.deviceGroup = updatedDeviceGroup
+        }
+        if(updatedRoom!=null){
+            updatedDevice.room = updatedRoom
+        }
+        if(updatedStatus!=null){
+            updatedDevice.status = updatedStatus
+        }
+
+        return await this.deviceRepository.save(updatedDevice)
     }
 
     async remove(id: string): Promise<Device> {

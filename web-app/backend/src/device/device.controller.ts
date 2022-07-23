@@ -40,7 +40,7 @@ export class DeviceController {
   @ApiResponse({status:200, description: 'Ok'})
   @ApiResponse({status:404, description: 'could not find matching device id'})
   async update(@Param('id') id: string, @Body() updateDeviceDto: UpdateDeviceDto) {
-    return await this.deviceService.update(+id, updateDeviceDto);
+    return await this.deviceService.update(id, updateDeviceDto);
   }
 
   @Delete(':id')

@@ -27,7 +27,7 @@ export class StatusService {
     });
   }
 
-  async findRoomByName(statusName: string): Promise<Status> {
+  async findStatusByName(statusName: string): Promise<Status> {
     return await this.statusRepository.findOne({ where: { statusName: statusName } });
   }
 
