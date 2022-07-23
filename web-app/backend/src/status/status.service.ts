@@ -13,27 +13,31 @@ export class StatusService {
 
   ) {}
 
-  create(createStatusDto: CreateStatusDto) {
+  /*async create(createStatusDto: CreateStatusDto) {
     return 'This action adds a new status';
+  }*/
+
+  async findAll():Promise<Status[]> {
+    return await this.statusRepository.find();
   }
 
-  findAll() {
-    return `This action returns all status`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} status`;
+  async findOne(id: string): Promise<Status> {
+    return await this.statusRepository.findOneOrFail(id,{
+      relations: ['device','type'],
+    });
   }
 
   async findRoomByName(statusName: string): Promise<Status> {
     return await this.statusRepository.findOne({ where: { statusName: statusName } });
   }
 
-  update(id: number, updateStatusDto: UpdateStatusDto) {
-    return `This action updates a #${id} status`;
+  /*async update(id: number, updateStatusDto: UpdateStatusDto) {
+    return await `This action updates a #${id} status`;
   }
-
-  remove(id: number) {
-    return `This action removes a #${id} status`;
-  }
+*/
+ /* async remove(id: string) {
+    const status = await this.findOne(id);
+    await this.statusRepository.remove(status);
+    return status;
+  }*/
 }

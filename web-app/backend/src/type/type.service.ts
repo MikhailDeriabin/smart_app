@@ -14,27 +14,31 @@ export class TypeService {
   ) {}
 
 
-  create(createTypeDto: CreateTypeDto) {
+  /*create(createTypeDto: CreateTypeDto) {
     return 'This action adds a new type';
+  }*/
+
+  async findAll(): Promise<Type[]> {
+    return await this.typeRepository.find({
+      relations: ['device', 'manufacturer','status'],
+    });
   }
 
-  findAll() {
-    return `This action returns all type`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} type`;
+  async findOne(id: string): Promise<Type> {
+    return await this.typeRepository.findOneOrFail(id,{
+      relations: ['device', 'manufacturer','status'],
+    });
   }
 
   async findTypeByName(typeName: string): Promise<Type> {
     return await this.typeRepository.findOne({ where: { typeName: typeName } });
   }
 
-  update(id: number, updateTypeDto: UpdateTypeDto) {
+  /*update(id: number, updateTypeDto: UpdateTypeDto) {
     return `This action updates a #${id} type`;
   }
 
   remove(id: number) {
     return `This action removes a #${id} type`;
-  }
+  }*/
 }

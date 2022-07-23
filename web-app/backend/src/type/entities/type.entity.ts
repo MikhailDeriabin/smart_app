@@ -21,7 +21,7 @@ export class Type {
 
     @ApiProperty()
     @Column({ unique: true })
-    typeName: string;
+    type: string;
 
     @ApiProperty()
     @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })

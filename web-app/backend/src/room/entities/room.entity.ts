@@ -18,7 +18,7 @@ export class Room {
 
     @ApiProperty()
     @Column()
-    roomName: string;
+    room: string;
 
     @ApiProperty()
     @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })

@@ -2,33 +2,39 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { TypeService } from './type.service';
 import { CreateTypeDto } from './dto/create-type.dto';
 import { UpdateTypeDto } from './dto/update-type.dto';
+import {ApiOperation, ApiResponse} from "@nestjs/swagger";
 
 @Controller('type')
 export class TypeController {
   constructor(private readonly typeService: TypeService) {}
 
-  @Post()
+ /* @Post()
   create(@Body() createTypeDto: CreateTypeDto) {
     return this.typeService.create(createTypeDto);
-  }
+  }*/
 
   @Get()
-  findAll() {
-    return this.typeService.findAll();
+  @ApiOperation({ summary: 'Get all types' })
+  @ApiResponse({ status: 200, description: 'Ok' })
+  async findAll() {
+    return await this.typeService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.typeService.findOne(+id);
+  @ApiOperation({ summary: 'Get a type' })
+  @ApiResponse({ status: 200, description: 'Ok' })
+  @ApiResponse({ status: 404, description: 'could not find matching type' })
+  async findOne(@Param('id') id: string) {
+    return await this.typeService.findOne(id);
   }
 
-  @Patch(':id')
+/*  @Patch(':id')
   update(@Param('id') id: string, @Body() updateTypeDto: UpdateTypeDto) {
     return this.typeService.update(+id, updateTypeDto);
-  }
+  }*/
 
-  @Delete(':id')
+/*  @Delete(':id')
   remove(@Param('id') id: string) {
     return this.typeService.remove(+id);
-  }
+  }*/
 }

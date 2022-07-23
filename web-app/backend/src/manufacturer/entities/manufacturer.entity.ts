@@ -19,7 +19,7 @@ export class Manufacturer {
 
     @ApiProperty()
     @Column({ unique: true })
-    manufacturerName: string;
+    manufacturer: string;
 
     @ApiProperty()
     @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
