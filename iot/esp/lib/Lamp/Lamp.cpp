@@ -19,8 +19,7 @@ Lamp::Lamp(int pinNumber, bool isPinAnalog, int intensivity, float brightness) :
 void Lamp::giveCommand(Status status, char* value, int valueSize){
     Util util;
     Converter converter;
-    this->status = status;
-    //HashMap<CommandValue, char*, 20, CmdValKeyHash> valueMap = util.parseValueCharArrToMap(value, valueSize); 
+    this->status = status; 
 
     switch (status){
         case ON:
@@ -33,30 +32,14 @@ void Lamp::giveCommand(Status status, char* value, int valueSize){
             break;
         case PULSE:
             Serial.println("PULSE");
-            char* intervalValueRaw;
-            /*
-            if(valueMap.get(INTERVAL_MS, intervalValueRaw)){
-                int intervalArrSize = intervalValueRaw[0] - '0';
-                char intervalValue[intervalArrSize];
-                util.splitCharArr(intervalValueRaw, intervalValue, 1, intervalArrSize-1);
-                float interval = converter.charArrToFloat(intervalValue, intervalArrSize);
+            if(value != nullptr){
+                int intervalValueRawSize = 10;
+                char intervalValueRaw[intervalValueRawSize];
+                
 
-                Serial.print("intervalValueRaw ");
-                Serial.println(intervalValueRaw);
-
-                Serial.print("intervalArrSize ");
-                Serial.println(intervalArrSize);
-
-                Serial.print("intervalValue ");
-                Serial.println(intervalValue);
-
-                Serial.print("interval ");
-                Serial.println(interval);
-
-                pulse(interval);               
             } else{
                 pulse();
-            }*/
+            }
             break;
         case SET_BRIGHTNESS:
             /*if(value != nullptr){

@@ -98,15 +98,6 @@ void callback(char *topic, byte *payload, unsigned int length) {
       char value[valueArrSize];
       util.splitCharArr(msg, value, separatorIndex+1, length-1);
 
-      //get value MapArr size
-      int valueMapArrSize = 0;
-      if(value[valueArrSize-1] != ',')
-          valueMapArrSize++;
-      for(int i=0; i<valueArrSize; i++){
-          if(value[i] == ',')
-              valueMapArrSize++;
-      }
-
       lamp.giveCommand(status, value, length-separatorIndex);
     } else{
       lamp.giveCommand(status, nullptr, 0);

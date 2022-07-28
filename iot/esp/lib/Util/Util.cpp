@@ -65,7 +65,7 @@ char* Util::concatCharArr(char* arr1, char* arr2, char* arrTo, int arr1Size, int
 
     return arrTo;
 }
-
+/*
 void Util::parseValueCharArrToMapArr(char arr[], char* arrTo[], int arrSize){
     int startIndex = 0, commaIndex = 0;
     int j = 0;
@@ -95,7 +95,7 @@ void Util::getFromMapArr(char key[], char* arr[], char* arrTo[], int keySize, in
         }
     }
 }
-
+*/
 bool Util::areCharArrSame(char* arr1, char* arr2, int arr1Size, int arr2Size){
     if(arr1Size != arr2Size)
         return false;
@@ -106,4 +106,38 @@ bool Util::areCharArrSame(char* arr1, char* arr2, int arr1Size, int arr2Size){
     }
 
     return true;
+}
+
+void Util::getValueFromValueString(char key[], char arr[], char valueArr[], int keySize, int arrSize, int* valueSize){
+    int keyStartIndex = 0, doublePointIndex = 0, commaIndex = 0;
+
+    for(int i=0; i<arrSize; i++){
+        //find double point index
+        if(arr[i] == ':'){
+            doublePointIndex = i;
+            
+            //find comma index (or end of array)
+            for(;i<arrSize; i++){
+                if(arr[i] == ',' || i == arrSize-1){
+                    commaIndex = i;
+                    break;
+                }
+            }
+
+            //get key of the current value
+            int currentKeySize = doublePointIndex-keyStartIndex-1;
+            char currentKey[currentKeySize];
+            splitCharArr(arr, currentKey, keyStartIndex, doublePointIndex-1);
+            //compare keys
+            bool isKeySame = areCharArrSame(key, currentKey, keySize, currentKeySize);
+            //if key found, put it to the pointer array and return from function
+            if(isKeySame){
+                *valueSize = i-doublePointIndex-1;
+                splitCharArr(arr, valueArr, doublePointIndex+1, commaIndex-1);
+                return;
+            }
+        }
+    }
+
+    *valueSize = 0;
 }
