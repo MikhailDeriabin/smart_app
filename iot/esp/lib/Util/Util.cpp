@@ -6,48 +6,12 @@ Converter converter;
 
 Util::Util(){}
 
-/*
-int* Util::getRGBFromCharArr(char arr[]){
-    char* redValue;
-    char* greenValue;
-    char* blueValue;
-    int red = 0, green = 0, blue = 0;
-    int firstCommaIndex = -1, secondCommaIndex = -1;
-
-    for(int i=0; i<sizeof(arr); i++){
-        if(arr[i] == ','){
-            if(firstCommaIndex == -1){
-                firstCommaIndex = i;
-            } else{
-                secondCommaIndex = i;
-                break;
-            }
-        }
-    }
-
-    //redValue = splitCharArr(arr, 0, firstCommaIndex-1);
-    //greenValue = splitCharArr(arr, firstCommaIndex+1, secondCommaIndex-1);
-    //blueValue = splitCharArr(arr, secondCommaIndex+1, sizeof(arr));
-
-    red = converter.charArrToInt(redValue, sizeof(redValue));
-    green = converter.charArrToInt(greenValue, sizeof(greenValue));
-    blue = converter.charArrToInt(blueValue, sizeof(blueValue));
-
-    int result[] = {red, green, blue};
-    return result;
-}
-*/
-
 char* Util::splitCharArr(char arr[], char arrTo[], int firstIndex, int lastIndex, int arrToStartIndex){
     int j = arrToStartIndex;
     for(int i=firstIndex; i<=lastIndex; i++){
-        /*Serial.print(i);
-        Serial.print(": ");
-        Serial.println(arr[i]);*/
         arrTo[j] = arr[i];
         j++;
     }
-    //Serial.println("---------------------***********************");
 
     return arrTo;
 }
@@ -65,37 +29,7 @@ char* Util::concatCharArr(char* arr1, char* arr2, char* arrTo, int arr1Size, int
 
     return arrTo;
 }
-/*
-void Util::parseValueCharArrToMapArr(char arr[], char* arrTo[], int arrSize){
-    int startIndex = 0, commaIndex = 0;
-    int j = 0;
 
-    for(int i=0; i<arrSize; i++){
-        if(arr[i] == ','){
-            commaIndex = i;
-
-            splitCharArr(arr, arrTo[j], startIndex, commaIndex);
-            j++;
-            startIndex = i+1;
-        }
-    }
-
-    if(arr[arrSize-1] != ','){
-        splitCharArr(arr, arrTo[j], commaIndex+1, arrSize-1);
-    }
-}
-
-void Util::getFromMapArr(char key[], char* arr[], char* arrTo[], int keySize, int arrSize){
-    for(int i=0; i<arrSize; i++){
-        char currentKey[keySize]; 
-        splitCharArr(arr[i], currentKey, 0, keySize-1);
-        bool isKeySame = areCharArrSame(key, currentKey, keySize, keySize);
-        if(isKeySame){
-
-        }
-    }
-}
-*/
 bool Util::areCharArrSame(char* arr1, char* arr2, int arr1Size, int arr2Size){
     if(arr1Size != arr2Size)
         return false;
@@ -108,36 +42,125 @@ bool Util::areCharArrSame(char* arr1, char* arr2, int arr1Size, int arr2Size){
     return true;
 }
 
-void Util::getValueFromValueString(char key[], char arr[], char valueArr[], int keySize, int arrSize, int* valueSize){
+void Util::getValueFromValueString(CommandValue commandValue, char str[], char valueArr[], int strSize, int* valueSize){
     int keyStartIndex = 0, doublePointIndex = 0, commaIndex = 0;
 
-    for(int i=0; i<arrSize; i++){
+    for(int i=0; i<strSize; i++){
         //find double point index
-        if(arr[i] == ':'){
+        if(str[i] == ':'){
             doublePointIndex = i;
             
             //find comma index (or end of array)
-            for(;i<arrSize; i++){
-                if(arr[i] == ',' || i == arrSize-1){
+            for(;i<strSize; i++){
+                if(str[i] == ',' || i == strSize-1){
                     commaIndex = i;
                     break;
                 }
             }
 
             //get key of the current value
-            int currentKeySize = doublePointIndex-keyStartIndex-1;
+            int currentKeySize = doublePointIndex-keyStartIndex;
+
             char currentKey[currentKeySize];
-            splitCharArr(arr, currentKey, keyStartIndex, doublePointIndex-1);
-            //compare keys
-            bool isKeySame = areCharArrSame(key, currentKey, keySize, currentKeySize);
+            splitCharArr(str, currentKey, keyStartIndex, doublePointIndex-1);
+            int currentKeyInt = converter.charArrToInt(currentKey, currentKeySize);
+            
             //if key found, put it to the pointer array and return from function
-            if(isKeySame){
+            if(commandValue == currentKeyInt){               
                 *valueSize = i-doublePointIndex-1;
-                splitCharArr(arr, valueArr, doublePointIndex+1, commaIndex-1);
+                splitCharArr(str, valueArr, doublePointIndex+1, commaIndex-1);
                 return;
             }
+
+            keyStartIndex = commaIndex+1;
         }
     }
 
     *valueSize = 0;
+}
+
+void Util::getValueIndexesFromValueString(CommandValue key, char str[], int strSize, int* valueStartIndex, int* valueEndIndex){
+    int keyStartIndex = 0, doublePointIndex = 0, commaIndex = 0;
+
+    for(int i=0; i<strSize; i++){
+        //find double point index
+        if(str[i] == ':'){
+            doublePointIndex = i;
+            
+            //find comma index (or end of array)
+            for(;i<strSize; i++){
+                if(str[i] == ',' || i == strSize-1){
+                    commaIndex = i;
+                    break;
+                }
+            }
+
+            //get key of the current value
+            int currentKeySize = doublePointIndex-keyStartIndex;
+
+            char currentKey[currentKeySize];
+            splitCharArr(str, currentKey, keyStartIndex, doublePointIndex-1);
+            int currentKeyInt = converter.charArrToInt(currentKey, currentKeySize);
+            
+            //if key found, put value start and end indexes to pointers and return from method
+            if(key == currentKeyInt){
+                *valueStartIndex = doublePointIndex+1;
+                *valueEndIndex = commaIndex-1;
+                return;
+            }
+
+            keyStartIndex = commaIndex+1;
+        }
+    }
+
+    *valueStartIndex = -1;
+    *valueEndIndex = -1;
+}
+
+float Util::getFloatValueFromValueString(CommandValue key, char str[], int strSize){
+    //find value indexes for provided key
+    int valueStartIndex, valueEndIndex;
+    getValueIndexesFromValueString(key, str, strSize, &valueStartIndex, &valueEndIndex);
+
+    //if something found
+    if(valueStartIndex != -1){
+        //get the value to array
+        int valueCharArrSize = valueEndIndex-valueStartIndex+1;
+        char valueCharArr[valueCharArrSize];
+        int j = valueStartIndex;
+        for(int i=0; i<valueCharArrSize; i++){
+            valueCharArr[i] = str[j];
+            j++;
+        }
+            
+        //parse it float
+        float interval = converter.charArrToFloat(valueCharArr, valueCharArrSize);    
+        return interval;
+    }
+    
+    return -1;
+}
+
+int Util::getIntValueFromValueString(CommandValue key, char str[], int strSize){
+    //find value indexes for provided key
+    int valueStartIndex, valueEndIndex;
+    getValueIndexesFromValueString(key, str, strSize, &valueStartIndex, &valueEndIndex);
+
+    //if something found
+    if(valueStartIndex != -1){
+        //get the value to array
+        int valueCharArrSize = valueEndIndex-valueStartIndex+1;
+        char valueCharArr[valueCharArrSize];
+        int j = valueStartIndex;
+        for(int i=0; i<valueCharArrSize; i++){
+            valueCharArr[i] = str[j];
+            j++;
+        }
+            
+        //parse it float
+        float interval = converter.charArrToInt(valueCharArr, valueCharArrSize);    
+        return interval;
+    }
+    
+    return -1;
 }

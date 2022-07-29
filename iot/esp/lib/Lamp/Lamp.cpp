@@ -16,43 +16,53 @@ Lamp::Lamp(int pinNumber, bool isPinAnalog, int intensivity, float brightness) :
     }       
 }
 
-void Lamp::giveCommand(Status status, char* value, int valueSize){
+void Lamp::giveCommand(Status status, char* valueStr, int valueStrSize){
     Util util;
     Converter converter;
-    this->status = status; 
+    this->status = status;
 
     switch (status){
-        case ON:
-            Serial.println("ON");
-            turnOn();
-            break;
         case OFF:
             Serial.println("OFF");
             turnOff();
             break;
+
+        case ON:
+            Serial.println("ON");            
+            turnOn();
+            break;
+
         case PULSE:
             Serial.println("PULSE");
-            if(value != nullptr){
-                int intervalValueRawSize = 10;
-                char intervalValueRaw[intervalValueRawSize];
-                
+            if(valueStr != nullptr){
+                float value = util.getFloatValueFromValueString(INTERVAL_MS, valueStr, valueStrSize);
+                if(value != -1){
+                    pulse(value);
+                    break;
+                }
+            }
 
-            } else{
-                pulse();
+            pulse();
+            break;
+
+        case SET_BRIGHTNESS:
+            Serial.println("SET_BRIGHTNESS");
+            if(valueStr != nullptr){
+                float value = util.getFloatValueFromValueString(LAMP_BRIGHTNESS, valueStr, valueStrSize);
+                if(value != -1)
+                    setBrightness(value, true);              
             }
             break;
-        case SET_BRIGHTNESS:
-            /*if(value != nullptr){
-                float brightness = converter.charArrToFloat(value);
-                setBrightness(brightness);               
-            }*/
-            break;
+
         case SET_INTENSIVITY:
-            /*if(value != nullptr){
-                int intensivity = converter.charArrToInt(value, sizeof(value));
-                setIntensivity(intensivity);               
-            }  */
+            Serial.println("SET_INTENSIVITY");
+            if(valueStr != nullptr){
+                int value = util.getIntValueFromValueString(LAMP_INTENSIVITY, valueStr, valueStrSize);
+                if(value != -1)
+                    setIntensivity(value, true);              
+            }
             break;
+
         default:
             break;
     }
@@ -85,7 +95,7 @@ void Lamp::pulse(float interval){
     delay(interval);
     turnOff();
     delay(interval);
-    status = PULSE;
+    status = PULSE;      
 }
 
 void Lamp::increaseIntensivity(int intensivity, bool write){

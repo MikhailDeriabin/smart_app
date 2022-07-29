@@ -6,8 +6,7 @@ public:
     Converter();
     float charArrToFloat(char arr[], int arrSize);
     int charArrToInt(char arr[], int arrSize);
-    //TODO: int to char method
-    char* intToCharArr(int arr, char arrTo[]);
+    char* intToCharArr(int num, char arrTo[], int* arrSize);
 };
 
 #endif

@@ -3,6 +3,7 @@
 #include <PubSubClient.h>
 
 #include "Lamp.h"
+#include "RGBLamp.h"
 #include "Status.h"
 #include "CommandValue.h"
 #include "Component.h"
@@ -14,7 +15,8 @@ const char* password = "228asus228";
 
 const char* mqtt_server = "192.168.50.93";
 const int mqtt_port = 1884;
-const char* topic = "esp8266/1";
+const char* topic1 = "esp8266/1";
+const char* topic2 = "esp8266/2";
 
 void setup_wifi();
 void callback(char *topic, byte *payload, unsigned int length);
@@ -24,6 +26,7 @@ PubSubClient client(espClient);
 
 //Components
 Lamp lamp(5);
+RGBLamp rgbLamp(13,12,14);
 
 void setup() {
   Serial.begin(9600); 
@@ -48,8 +51,8 @@ void setup() {
     }   
   }
 
-  client.publish(topic, "ESP8266 connected!");
-  client.subscribe(topic);
+  client.subscribe(topic1);
+  client.subscribe(topic2);  
 }
 
 void setup_wifi() {
@@ -97,10 +100,30 @@ void callback(char *topic, byte *payload, unsigned int length) {
       int valueArrSize = length-separatorIndex;
       char value[valueArrSize];
       util.splitCharArr(msg, value, separatorIndex+1, length-1);
-
       lamp.giveCommand(status, value, length-separatorIndex);
     } else{
       lamp.giveCommand(status, nullptr, 0);
+    }
+  } 
+  
+  if(String(topic) == "esp8266/2"){   
+    int separatorIndex = -1;
+    for (int i = 0; i < length; i++) {
+      if(msg[i] == ';')
+        separatorIndex = i;
+    }
+
+    char statusValue[separatorIndex];
+    util.splitCharArr(msg, statusValue, 0, separatorIndex-1);
+    Status status = static_cast<Status>(converter.charArrToInt(statusValue, sizeof(statusValue)/sizeof(statusValue[0])));
+
+    if(separatorIndex < length-1){
+      int valueArrSize = length-separatorIndex;
+      char value[valueArrSize];
+      util.splitCharArr(msg, value, separatorIndex+1, length-1);
+      rgbLamp.giveCommand(status, value, length-separatorIndex);
+    } else{
+      rgbLamp.giveCommand(status, nullptr, 0);
     }
   }
 }

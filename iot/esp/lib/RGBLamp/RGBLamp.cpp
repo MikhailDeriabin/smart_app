@@ -5,9 +5,7 @@
 #include <Status.h>
 #include <Converter.h>
 #include <Util.h>
-#include <HashMap.h>
 #include <CommandValue.h>
-#include <CmdValKeyHash.h>
 
 RGBLamp::RGBLamp(int redPinNumber, int greenPinNumber, int bluePinNumber) : redPinNumber(redPinNumber), greenPinNumber(greenPinNumber), bluePinNumber(bluePinNumber){
     Component::name = "RGBLamp";
@@ -16,46 +14,65 @@ RGBLamp::RGBLamp(int redPinNumber, int greenPinNumber, int bluePinNumber) : redP
     this->blueLamp = new Lamp(this->bluePinNumber, true, 255);
 }
 
-void RGBLamp::giveCommand(Status status, HashMap<CommandValue, char*, 20, CmdValKeyHash> values){
-    Converter converter;
+void RGBLamp::giveCommand(Status status, char* valueStr, int valueStrSize){
     Util util;
+    Converter converter;
     this->status = status;
+
     switch (status){
-        /*case ON:
-            turnOn();
-            break;
         case OFF:
+            Serial.println("OFF");
             turnOff();
             break;
+
+        case ON:
+            Serial.println("ON");            
+            turnOn();
+            break;
+
         case PULSE:
-            if(value != nullptr){
-                float interval = converter.charArrToFloat(value);
-                pulse(interval);               
-            } else{
-                pulse();
-            }
             Serial.println("PULSE");
+            if(valueStr != nullptr){
+                float value = util.getFloatValueFromValueString(INTERVAL_MS, valueStr, valueStrSize);
+                if(value != -1){
+                    pulse(value);
+                    break;
+                }
+            }
+
+            pulse();
             break;
+
         case SET_BRIGHTNESS:
-            if(value != nullptr){
-                float brightness = converter.charArrToFloat(value);
-                setBrightness(brightness);               
+            Serial.println("SET_BRIGHTNESS");
+            if(valueStr != nullptr){
+                float value = util.getFloatValueFromValueString(LAMP_BRIGHTNESS, valueStr, valueStrSize);
+                if(value != -1)
+                    setBrightness(value, true);              
             }
             break;
+
         case SET_INTENSIVITY:
-            if(value != nullptr){
-                int intensivity = converter.charArrToInt(value, sizeof(value));
-                setIntensivity(intensivity);               
+            Serial.println("SET_INTENSIVITY");
+            if(valueStr != nullptr){
+                int value = util.getIntValueFromValueString(LAMP_INTENSIVITY, valueStr, valueStrSize);
+                if(value != -1)
+                    setIntensivity(value, true);              
             }
             break;
+
         case SET_COLOR:
-             if(value != nullptr){
-                
-                int* colorValues = util.getRGBFromCharArr(value);
-                if(sizeof(colorValues) >= 3)
-                    setColor(colorValues[0], colorValues[1], colorValues[2]);               
+            Serial.println("SET_COLOR");
+            if(valueStr != nullptr){
+                int red = util.getIntValueFromValueString(RED_COLOR, valueStr, valueStrSize);
+                int green = util.getIntValueFromValueString(GREEN_COLOR, valueStr, valueStrSize);
+                int blue = util.getIntValueFromValueString(BLUE_COLOR, valueStr, valueStrSize);
+                if(red != -1) setRedIntensivity(red, true);
+                if(green != -1) setGreenIntensivity(green, true);
+                if(blue != -1) setBlueIntensivity(blue, true);              
             }
-            break;*/
+            break;
+
         default:
             break;
     }

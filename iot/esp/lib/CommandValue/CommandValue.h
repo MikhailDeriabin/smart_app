@@ -7,7 +7,9 @@ enum CommandValue{
 
     LAMP_INTENSIVITY,
     LAMP_BRIGHTNESS,
-    RGB_COLOR
+    RED_COLOR,
+    GREEN_COLOR,
+    BLUE_COLOR
 };
 
 #endif
