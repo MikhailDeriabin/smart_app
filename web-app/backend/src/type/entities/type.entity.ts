@@ -1,9 +1,10 @@
 import {
+    Column,
     CreateDateColumn,
     Entity, JoinTable,
     ManyToMany,
     ManyToOne,
-    OneToMany, PrimaryColumn,
+    OneToMany, PrimaryColumn, PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
 import {Device} from "../../device/entities/device.entity";
@@ -15,7 +16,11 @@ import {Status} from "../../status/entities/status.entity";
 export class Type {
 
     @ApiProperty()
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @ApiProperty()
+    @Column({ unique: true })
     typeName: string;
 
     @ApiProperty()

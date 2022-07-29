@@ -20,6 +20,7 @@ const resources = {
             profile: "Profile",
             devices: "Devices",
             about: "About",
+            groups: "Groups",
             selectLanguage: "Select language"
         }
     },
@@ -37,7 +38,8 @@ const resources = {
             welcome: "Tervetuloa",
             profile: "Profiili",
             devices: "Laitteet",
-            about: "About",
+            about: "Tiedot",
+            groups: "Ryhmät",
             selectLanguage: "Valitse kieli"
         }
     },
@@ -56,6 +58,7 @@ const resources = {
             profile: "Профиль",
             devices: "Устройства",
             about: "О программе",
+            groups: "группы",
             selectLanguage: "Выберите язык"
         }
     },

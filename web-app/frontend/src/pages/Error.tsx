@@ -2,7 +2,7 @@ import {useNavigate} from "react-router-dom";
 
 const Error = () => {
 
-    let f:any ;
+    //let f:any ;
 
     const navigate = useNavigate();
     return (

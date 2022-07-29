@@ -3,7 +3,7 @@ import {
     Entity,
     OneToMany,
     UpdateDateColumn,
-    PrimaryColumn
+    PrimaryColumn, PrimaryGeneratedColumn, Column
 } from "typeorm";
 import {ApiProperty} from "@nestjs/swagger";
 import {Device} from "../../device/entities/device.entity";
@@ -13,7 +13,11 @@ import {Type} from "../../type/entities/type.entity";
 export class Manufacturer {
 
     @ApiProperty()
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @ApiProperty()
+    @Column({ unique: true })
     manufacturerName: string;
 
     @ApiProperty()
