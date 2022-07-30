@@ -1,8 +1,9 @@
 #ifndef LAMP_H
 #define LAMP_H
 
-#include "../Status.h"
-#include "Device.h"
+#include <Status.h>
+#include <Device.h>
+#include <CommandValue.h>
 
 /**
  * @brief The class represents LED lamp.
@@ -18,7 +19,7 @@ private:
 public:
     Lamp(int pinNumber, bool isPinAnalog=false, int intensivity=255, float brightness=1);
 
-    void giveCommand(Status status, char value[]=NULL) override;
+    void giveCommand(Status status, char* value, int valueSize) override;
 
     /**
      * @brief The method make a pulse signal(turn on -> turn off) with the given interval.

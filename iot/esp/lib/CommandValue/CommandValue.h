@@ -1,0 +1,15 @@
+#ifndef COMMANDVALUE_H
+#define COMMANDVALUE_H
+
+enum CommandValue{
+    INTERVAL_MS,
+    DURATION_MS,
+
+    LAMP_INTENSIVITY,
+    LAMP_BRIGHTNESS,
+    RED_COLOR,
+    GREEN_COLOR,
+    BLUE_COLOR
+};
+
+#endif

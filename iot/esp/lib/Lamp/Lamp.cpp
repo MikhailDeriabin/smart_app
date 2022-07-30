@@ -1,12 +1,12 @@
 #include "Arduino.h"
-#include "Lamp.h"
-#include "Device.h"
-#include "../Status.h"
-#include "../util/Converter.h"
+#include <Status.h>
+#include <Lamp.h>
+#include <Device.h>
+#include <Converter.h>
+#include <Util.h>
+#include <CommandValue.h>
 
-Converter converter;
-
-Lamp::Lamp(int pinNumber, bool isPinAnalog=false, int intensivity=255, float brightness=1) : pinNumber(pinNumber), isPinAnalog(isPinAnalog){
+Lamp::Lamp(int pinNumber, bool isPinAnalog, int intensivity, float brightness) : pinNumber(pinNumber), isPinAnalog(isPinAnalog){
     Component::name = "Lamp";
     int pins [] = {this->pinNumber};
     Component::setPinMode(pins, OUTPUT);
@@ -16,30 +16,53 @@ Lamp::Lamp(int pinNumber, bool isPinAnalog=false, int intensivity=255, float bri
     }       
 }
 
-void Lamp::giveCommand(Status status, char value[]=NULL){
+void Lamp::giveCommand(Status status, char* valueStr, int valueStrSize){
+    Util util;
+    Converter converter;
     this->status = status;
+
     switch (status){
-        case ON:
-            turnOn();
         case OFF:
+            Serial.println("OFF");
             turnOff();
+            break;
+
+        case ON:
+            Serial.println("ON");            
+            turnOn();
+            break;
+
         case PULSE:
-            if(value != NULL){
-                float interval = converter.charArrToFloat(value);
-                pulse(interval);               
-            } else{
-                pulse();
+            Serial.println("PULSE");
+            if(valueStr != nullptr){
+                float value = util.getFloatValueFromValueString(INTERVAL_MS, valueStr, valueStrSize);
+                if(value != -1){
+                    pulse(value);
+                    break;
+                }
             }
+
+            pulse();
+            break;
+
         case SET_BRIGHTNESS:
-            if(value != NULL){
-                float brightness = converter.charArrToFloat(value);
-                setBrightness(brightness);               
+            Serial.println("SET_BRIGHTNESS");
+            if(valueStr != nullptr){
+                float value = util.getFloatValueFromValueString(LAMP_BRIGHTNESS, valueStr, valueStrSize);
+                if(value != -1)
+                    setBrightness(value, true);              
             }
+            break;
+
         case SET_INTENSIVITY:
-            if(value != NULL){
-                int intensivity = converter.charArrToInt(value);
-                setIntensivity(intensivity);               
-            }  
+            Serial.println("SET_INTENSIVITY");
+            if(valueStr != nullptr){
+                int value = util.getIntValueFromValueString(LAMP_INTENSIVITY, valueStr, valueStrSize);
+                if(value != -1)
+                    setIntensivity(value, true);              
+            }
+            break;
+
         default:
             break;
     }
@@ -63,7 +86,7 @@ void Lamp::turnOff(){
     this->status = OFF;    
 }
 
-void Lamp::pulse(float interval=1000){
+void Lamp::pulse(float interval){
     //Can not see blinking if the inteval is below 20 ms
     if(interval < 20)
         interval = 20;
@@ -72,21 +95,21 @@ void Lamp::pulse(float interval=1000){
     delay(interval);
     turnOff();
     delay(interval);
-    status = PULSE;
+    status = PULSE;      
 }
 
-void Lamp::increaseIntensivity(int intensivity, bool write=false){
+void Lamp::increaseIntensivity(int intensivity, bool write){
     setIntensivity(this->intensivity + intensivity);
     if(write)
         analogWrite(pinNumber, this->intensivity*brightness);
 }
-void Lamp::decreaseIntensivity(int intensivity, bool write=false){
+void Lamp::decreaseIntensivity(int intensivity, bool write){
     setIntensivity(this->intensivity - intensivity);
     if(write)
         analogWrite(pinNumber, this->intensivity*brightness);
 }
 
-void Lamp::setIntensivity(int intensivity, bool write=false){ 
+void Lamp::setIntensivity(int intensivity, bool write){ 
     this->intensivity = intensivity > 255 ? 255 : intensivity;
     this->intensivity = intensivity < 0 ? 0 : intensivity;
     this->intensivity = intensivity; 
@@ -95,7 +118,7 @@ void Lamp::setIntensivity(int intensivity, bool write=false){
 }
 int Lamp::getIntensivity(){ return this->intensivity; }
 
-void Lamp::setBrightness(float brightness, bool write=false){
+void Lamp::setBrightness(float brightness, bool write){
     brightness = brightness > 1 ? 1 : brightness;
     brightness = brightness < 0 ? 0 : brightness;
     this->brightness = brightness;

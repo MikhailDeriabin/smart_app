@@ -1,8 +1,10 @@
 #ifndef RGBLAMP_H
 #define RGBLAMP_H
 
-#include "Device.h"
-#include "Lamp.h"
+#include <Device.h>
+#include <Lamp.h>
+#include <CommandValue.h>
+#include <Status.h>
 
 /**
  * @brief The class represents RGB Lamp lamp.
@@ -23,7 +25,7 @@ public:
      */
     RGBLamp(int redPinNumber, int greenPinNumber, int bluePinNumber);
 
-    void giveCommand(Status status, char value[]=NULL) override;
+    void giveCommand(Status status, char* value, int valueSize) override;
 
     /**
      * @brief The method turn the lamp on.

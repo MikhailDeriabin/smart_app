@@ -3,6 +3,5 @@
 #include "Arduino.h"
 
 Device::Device() : Component(){
-    this->status = OFF;
     Component::name = "Device";
 }

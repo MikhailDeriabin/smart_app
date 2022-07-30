@@ -1,8 +1,8 @@
 #ifndef DEVICE_H
 #define DEVICE_H
 
-#include "../Component.h"
-#include "../Status.h"
+#include <Component.h>
+#include <Status.h>
 
 class Device : public Component{
 public:
