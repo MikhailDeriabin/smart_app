@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <Converter.h>
 #include <Util.h>
+#include <Component.h>
 
 Converter converter;
 
@@ -163,4 +164,16 @@ int Util::getIntValueFromValueString(CommandValue key, char str[], int strSize){
     }
     
     return -1;
+}
+
+Component* Util::getDeviceIdFromTopic(char* clientId, char* topic, Component* components[], int size){
+    String topicStart = clientId;
+    topicStart += "/";
+    for(int i=0; i<size; i++){
+        String wholeTopic = topicStart + i;
+        if(wholeTopic == topic){
+            return components[i];
+        }
+    }
+    return nullptr;
 }
