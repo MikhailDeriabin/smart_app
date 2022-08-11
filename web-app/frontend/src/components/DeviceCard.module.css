@@ -2,6 +2,7 @@
     background-color: var(--color-primary);
     min-height: 5em;
     border-radius: 0.5em;
+    padding: 5px 10px;
 }
 
 .manufacturer {
@@ -18,6 +19,12 @@
     color: var(--font-primary-color);
     grid-column-start: 1;
     grid-row-start: 1;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .content {

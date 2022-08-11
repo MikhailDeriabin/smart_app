@@ -1,0 +1,33 @@
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+}
+
+.container {
+    display: grid;
+}
+
+input[type="checkbox"]:focus {
+    outline: 0;
+}
+
+.toggle {
+    grid-column: 1;
+    grid-row: 1;
+    height: 24px;
+    width: 24px;
+    display: inline-block;
+    position: relative;
+    margin: 0;
+}
+
+.star {
+    grid-column: 1;
+    grid-row: 1;
+    position: relative;
+    height: 24px;
+    width: 24px;
+}

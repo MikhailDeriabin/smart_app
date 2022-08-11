@@ -9,7 +9,6 @@ input[type="checkbox"] {
 input[type="checkbox"]:focus {
     outline: 0;
 }
-
 .toggle {
     height: 24px;
     width: 48px;

@@ -3,6 +3,7 @@
     position: sticky;
     top: 0;
     z-index: 999;
+    border-bottom: var(--color-primary-variant) 1px solid;
 }
 .menuitems{
     list-style-type: none;
