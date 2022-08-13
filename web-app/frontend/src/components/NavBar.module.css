@@ -34,6 +34,7 @@
     background-color: transparent;
     border: 0;
     height: 48px;
+    cursor: pointer;
 }
 .menuburger{
     display: inline-block;
@@ -68,6 +69,25 @@
     cursor: pointer;
     margin: 0.5em 0.5em 0.5em 0em;
     color: var(--font-secondary-color);
+}
+
+.arrow {
+    border: solid var(--font-secondary-color);
+    border-width: 0 4px 4px 0;
+    display: inline-block;
+    padding: 0.6em;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.backButton {
+    display: inline-block;
+    background-color: transparent;
+    border: 0;
+    padding: 0.6em;
+    margin-left: 0.5em;
+    height: 48px;
+    cursor: pointer;
 }
 
 .icons {

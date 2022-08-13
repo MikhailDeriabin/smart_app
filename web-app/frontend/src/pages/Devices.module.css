@@ -1,0 +1,39 @@
+.buttonBar {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: var(--color-primary);
+    width: 100%;
+    height: 3em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-top: var(--color-primary-variant) 1px solid;
+}
+
+.addNew {
+    width: 10em;
+    background-color: #4EDE6D;
+    border-radius: 0.5em;
+}
+
+.addNew:hover {
+    background-color: #44c961;
+}
+
+.addNew:active {
+    background-color: #57ea77;
+}
+
+.remove {
+    background-color: #de4e4e;
+    border-radius: 0.5em;
+}
+
+.remove:hover {
+    background-color: #c74040;
+}
+
+.remove:active {
+    background-color: #ee5757;
+}

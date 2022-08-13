@@ -5,6 +5,8 @@ const Main = () => {
         <div className="container">
             <div></div>
             <DeviceCard name={"LED Lamppu"} description={"Etc"} manufacturer={"Bosh Led Lamppu"}/>
+            <DeviceCard name={"LED Lamppu"} description={"Etc"} manufacturer={"Bosh Led Lamppu"}/>
+            <DeviceCard name={"LED Lamppu"} description={"Etc"} manufacturer={"Bosh Led Lamppu"}/>
         </div>
     );
 };

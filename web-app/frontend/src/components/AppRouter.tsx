@@ -5,6 +5,7 @@ import Main from "../pages/Main";
 import Devices from "../pages/Devices";
 import Groups from "../pages/Groups";
 import About from "../pages/About";
+import RegisterDevice from "../pages/RegisterDevice";
 
 const AppRouter = () => {
     return (
@@ -15,7 +16,8 @@ const AppRouter = () => {
                     <Route path="/devices" element={<Devices/>}/>
                     <Route path="/groups" element={<Groups/>}/>
                     <Route path="/about" element={<About/>}/>
-                    <Route path="404"  element={<Error/>}/>
+                    <Route path={"/devices/register"} element={<RegisterDevice/>}/>
+                    <Route path="404" element={<Error/>}/>
                     <Route
                         path="*"
                         element={<Navigate to="404" replace />}

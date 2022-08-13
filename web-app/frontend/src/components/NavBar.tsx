@@ -13,13 +13,21 @@ const NavBar = () => {
     const {t} = useTranslation();
     const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
-    console.log(visible)
+    console.log(window.location.pathname)
+    console.log(window.location.pathname.split("/"))
     return (
         <nav className={navClasses.navbar}>
             <div className={navClasses.navbar_container}>
-                <button onClick={()=>setVisible(!visible)} className={navClasses.hamburger_lines}>
-                    <Menu fill={`var(--font-secondary-color)`} className={navClasses.menuburger}/>
-                </button>
+                {
+                    window.location.pathname.split("/").length > 2 ?
+                        <button onClick={() => navigate(-1)} className={navClasses.backButton}>
+                            <div className={navClasses.arrow}/>
+                        </button>
+                        :
+                        <button onClick={() => setVisible(!visible)} className={navClasses.hamburger_lines}>
+                            <Menu fill={`var(--font-secondary-color)`} className={navClasses.menuburger}/>
+                        </button>
+                }
                 <h1 className={navClasses.title}>Smart App</h1>
             </div>
                 {
