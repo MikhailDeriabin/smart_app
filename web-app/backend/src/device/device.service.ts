@@ -37,9 +37,9 @@ export class DeviceService {
     ) {
     }
 
-    async insertDevice(createDeviceDto: CreateDeviceDto): Promise<Device> {
+    async insertDevice(createDeviceDto: CreateDeviceDto): Promise<Device|null> {
 
-        const device = new Device();
+        let device = new Device();
         const deviceName = createDeviceDto.deviceName;
         const deviceConsumption = createDeviceDto.deviceConsumption;
         const manufacturer = await this.manufacturerService.findManufacturerByName(createDeviceDto.manufacturer);
@@ -47,10 +47,27 @@ export class DeviceService {
         const deviceGroup = await this.deviceGroupService.findDeviceGroupByName(createDeviceDto.deviceGroup);
         const room = await this.roomService.findRoomByName(createDeviceDto.room)
 
+
         device.deviceName = deviceName;
         device.deviceConsumption = deviceConsumption;
         device.manufacturer = manufacturer;
         device.type = type;
+
+        if (deviceName == null){
+            device = null;
+            return device
+        }
+        if (deviceConsumption == null){
+            device.deviceConsumption = 0
+        }
+        if (manufacturer == null){
+            device = null;
+            return device
+        }
+        if (type == null){
+            device = null;
+            return device
+        }
 
         if(deviceGroup!=null){
             device.deviceGroup = deviceGroup

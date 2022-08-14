@@ -39,7 +39,7 @@ export class Device {
 
     @ApiProperty({ type: () => Manufacturer })
     @ManyToOne(() => Manufacturer, (manufacturer) => manufacturer.devices)
-    manufacturer?: Manufacturer;
+    manufacturer: Manufacturer;
 
     @ApiProperty({ type: () => Status })
     @ManyToOne(() => Status, (status) => status.devices)
