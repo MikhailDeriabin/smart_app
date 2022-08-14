@@ -6,9 +6,8 @@ export class CreateDeviceDto {
 
     @ApiProperty({example:'Philips-tv', description: 'The device name', required : false})
     @IsString()
-    @IsOptional()
     @IsNotEmpty()
-    deviceName?: string;
+    deviceName: string;
 
     @ApiProperty({example:'150', description: "The energy consumption(W)"})
     @IsNumber()
@@ -30,11 +29,11 @@ export class CreateDeviceDto {
     @IsString()
     @IsOptional()
     @IsNotEmpty()
-    deviceGroupName?: string;
+    deviceGroup?: string;
 
     @ApiProperty({example:'Kitchen', description: 'The device room name',required:false})
     @IsString()
     @IsOptional()
     @IsNotEmpty()
-    roomName?: string;
+    room?: string;
 }

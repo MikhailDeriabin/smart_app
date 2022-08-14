@@ -20,7 +20,7 @@ export class DeviceGroup {
 
     @ApiProperty()
     @Column()
-    deviceGroupName: string;
+    deviceGroup: string;
 
     @ApiProperty()
     @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })

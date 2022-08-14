@@ -3,7 +3,7 @@ import {
     CreateDateColumn,
     Entity,
     OneToMany,
-    PrimaryColumn,
+     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
 import {ApiProperty} from "@nestjs/swagger";
@@ -13,12 +13,12 @@ import {Device} from "../../device/entities/device.entity";
 export class Room {
 
     @ApiProperty()
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
     id: number;
 
     @ApiProperty()
     @Column()
-    roomName: string;
+    room: string;
 
     @ApiProperty()
     @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })

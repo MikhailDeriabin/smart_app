@@ -19,7 +19,7 @@ export class Status {
 
     @ApiProperty()
     @Column({ unique: true })
-    statusName: string;
+    status: string;
 
     @ApiProperty()
     @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })

@@ -5,5 +5,5 @@ export class CreateManufacturerDto {
     @ApiProperty({example:'Lenovo', description: 'The manufacturer name'})
     @IsString()
     @IsNotEmpty()
-    manufacturerName: string;
+    manufacturer: string;
 }

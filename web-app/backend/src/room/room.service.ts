@@ -4,6 +4,9 @@ import { UpdateRoomDto } from './dto/update-room.dto';
 import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
 import {Room} from "./entities/room.entity";
+import {DeviceGroup} from "../device-group/entities/device-group.entity";
+
+
 
 @Injectable()
 export class RoomService {
@@ -14,29 +17,35 @@ export class RoomService {
   ) {}
 
 
-  create(createRoomDto: CreateRoomDto) {
-    return 'This action adds a new room';
+  async create(createRoomDto: CreateRoomDto): Promise<Room> {
+    const room = new Room();
+    room.room = createRoomDto.room
+    return await this.roomRepository.save(room);
   }
 
 
-
-  findAll() {
-    return `This action returns all room`;
+  async findAll(): Promise<Room[]> {
+    return await this.roomRepository.find({ relations: ['device'] });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} room`;
+  async findOne(id: string): Promise<Room> {
+    return await this.roomRepository.findOneOrFail(id, {
+      relations: ['device'],
+    });
   }
 
-  async findRoomByName(roomName: string): Promise<Room> {
-    return await this.roomRepository.findOne({ where: { roomName: roomName } });
+  async findRoomByName(room: string): Promise<Room> {
+    return await this.roomRepository.findOne({ where: { room: room } });
   }
 
-  update(id: number, updateRoomDto: UpdateRoomDto) {
-    return `This action updates a #${id} room`;
-  }
 
-  remove(id: number) {
-    return `This action removes a #${id} room`;
+  /* async update(id: string, updateRoomDto: UpdateRoomDto): Promise<Room> {
+    return await`This action updates a #${id} room`;
+  }*/
+
+  async remove(id: string): Promise<Room> {
+    const room = await this.findOne(id);
+    await this.roomRepository.remove(room);
+    return room;
   }
 }

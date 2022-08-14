@@ -1,56 +1,124 @@
-import { Injectable } from '@nestjs/common';
-import { CreateDeviceDto } from './dto/create-device.dto';
-import { UpdateDeviceDto } from './dto/update-device.dto';
+import {Injectable} from '@nestjs/common';
+import {CreateDeviceDto} from './dto/create-device.dto';
+import {UpdateDeviceDto} from './dto/update-device.dto';
 import {InjectRepository} from "@nestjs/typeorm";
 import {Device} from "./entities/device.entity";
 import {Repository} from "typeorm";
+import {DeviceGroupService} from "../device-group/device-group.service";
+import {RoomService} from "../room/room.service";
+import {StatusService} from "../status/status.service";
+import {TypeService} from "../type/type.service";
+import {ManufacturerService} from "../manufacturer/manufacturer.service";
 
 @Injectable()
 export class DeviceService {
 
-/*  constructor(
-      @InjectRepository(Category)
-      private categoryRepository: Repository<Category>,
-  ) {}
+    /*  constructor(
+          @InjectRepository(Category)
+          private categoryRepository: Repository<Category>,
+      ) {}
 
-  async insertCategory(
-      createCategoryDto: CreateCategoryDto,
-  ): Promise<Category> {
-    const category = new Category();
-    category.name = createCategoryDto.name;
-    category.description = createCategoryDto.description;
-    return await this.categoryRepository.save(category);
-  }*/
+      async insertCategory(
+          createCategoryDto: CreateCategoryDto,
+      ): Promise<Category> {
+        const category = new Category();
+        category.name = createCategoryDto.name;
+        category.description = createCategoryDto.description;
+        return await this.categoryRepository.save(category);
+      }*/
 
-  constructor(
-      @InjectRepository(Device) private readonly deviceRepository: Repository<Device>
+    constructor(
+        @InjectRepository(Device) private readonly deviceRepository: Repository<Device>,
+        private readonly deviceGroupService: DeviceGroupService,
+        private readonly roomService: RoomService,
+        private readonly statusService: StatusService,
+        private readonly typeService: TypeService,
+        private readonly manufacturerService: ManufacturerService
+    ) {
+    }
 
-  ) {}
+    async insertDevice(createDeviceDto: CreateDeviceDto): Promise<Device|null> {
 
-  async insertDevice(createDeviceDto: CreateDeviceDto): Promise<Device> {
-    const device = new Device();
-    device.deviceName = createDeviceDto.deviceName
+        let device = new Device();
+        const deviceName = createDeviceDto.deviceName;
+        const deviceConsumption = createDeviceDto.deviceConsumption;
+        const manufacturer = await this.manufacturerService.findManufacturerByName(createDeviceDto.manufacturer);
+        const type = await this.typeService.findTypeByName(createDeviceDto.type);
+        const deviceGroup = await this.deviceGroupService.findDeviceGroupByName(createDeviceDto.deviceGroup);
+        const room = await this.roomService.findRoomByName(createDeviceDto.room)
 
-    return await this.deviceRepository.save(device)
-  }
 
-  findAll() {
-    return `This action returns all device`;
-  }
+        device.deviceName = deviceName;
+        device.deviceConsumption = deviceConsumption;
+        device.manufacturer = manufacturer;
+        device.type = type;
 
-  findOne(id: number) {
-    return `This action returns a #${id} device`;
-  }
+        if (deviceName == null){
+            device = null;
+            return device
+        }
+        if (deviceConsumption == null){
+            device.deviceConsumption = 0
+        }
+        if (manufacturer == null){
+            device = null;
+            return device
+        }
+        if (type == null){
+            device = null;
+            return device
+        }
 
-  async findDeviceByName(deviceName: string): Promise<Device> {
-    return await this.deviceRepository.findOne({ where: { deviceName: deviceName } });
-  }
+        if(deviceGroup!=null){
+            device.deviceGroup = deviceGroup
+        }
+        if(room!=null){
+            device.room = room
+        }
 
-  update(id: number, updateDeviceDto: UpdateDeviceDto) {
-    return `This action updates a #${id} device`;
-  }
+        return await this.deviceRepository.save(device)
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} device`;
-  }
+    async findAll(): Promise<Device[]> {
+        return await this.deviceRepository.find();
+    }
+
+    async findDeviceById(id: string): Promise<Device> {
+        return await this.deviceRepository.findOneOrFail(id)
+    }
+
+    async findDeviceByName(deviceName: string): Promise<Device> {
+        return await this.deviceRepository.findOne({where: {deviceName: deviceName}});
+    }
+
+    async update(id: string, updateDeviceDto: UpdateDeviceDto): Promise<Device> {
+        const updatedDevice = await this.findDeviceById(id);
+        await this.remove(id);
+
+        const updatedDeviceName = updateDeviceDto.deviceName;
+        const updatedDeviceGroup = await this.deviceGroupService.findDeviceGroupByName(updateDeviceDto.deviceGroup);
+        const updatedRoom = await this.roomService.findRoomByName(updateDeviceDto.room);
+        const updatedStatus = await this.statusService.findStatusByName(updateDeviceDto.status)
+
+        if(updatedDeviceName!=null){
+            updatedDevice.deviceName = updatedDeviceName
+        }
+        if(updatedDeviceGroup!=null){
+            updatedDevice.deviceGroup = updatedDeviceGroup
+        }
+        if(updatedRoom!=null){
+            updatedDevice.room = updatedRoom
+        }
+        if(updatedStatus!=null){
+            updatedDevice.status = updatedStatus
+        }
+
+        return await this.deviceRepository.save(updatedDevice)
+    }
+
+    async remove(id: string): Promise<Device> {
+        const device = await this.deviceRepository.findOneOrFail(id);
+        await this.deviceRepository.remove(device);
+        return device;
+    }
 }

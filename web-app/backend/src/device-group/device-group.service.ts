@@ -4,36 +4,43 @@ import { UpdateDeviceGroupDto } from './dto/update-device-group.dto';
 import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
 import {DeviceGroup} from "./entities/device-group.entity";
+import {DeviceService} from "../device/device.service";
 
 @Injectable()
 export class DeviceGroupService {
 
   constructor(
-      @InjectRepository(DeviceGroup) private readonly deviceGroupRepository: Repository<DeviceGroup>
-
+      @InjectRepository(DeviceGroup)
+      private readonly deviceGroupRepository: Repository<DeviceGroup>,
   ) {}
 
-  create(createDeviceGroupDto: CreateDeviceGroupDto) {
-    return 'This action adds a new deviceGroup';
+  async create(createDeviceGroupDto: CreateDeviceGroupDto): Promise<DeviceGroup> {
+    const deviceGroup = new DeviceGroup();
+    deviceGroup.deviceGroup = createDeviceGroupDto.deviceGroup
+    return await this.deviceGroupRepository.save(deviceGroup);
   }
 
-  findAll() {
-    return `This action returns all deviceGroup`;
+  async findAll(): Promise<DeviceGroup[]> {
+    return await this.deviceGroupRepository.find({ relations: ['device'] });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} deviceGroup`;
+  async findOne(id: string): Promise<DeviceGroup> {
+    return await this.deviceGroupRepository.findOneOrFail(id, {
+      relations: ['device'],
+    });
   }
 
-  async findDeviceGroupByName(deviceGroupName: string): Promise<DeviceGroup> {
-    return await this.deviceGroupRepository.findOne({ where: { deviceGroupName: deviceGroupName } });
+  async findDeviceGroupByName(deviceGroup: string): Promise<DeviceGroup> {
+    return await this.deviceGroupRepository.findOne({ where: { deviceGroup: deviceGroup } });
   }
 
-  update(id: number, updateDeviceGroupDto: UpdateDeviceGroupDto) {
-    return `This action updates a #${id} deviceGroup`;
-  }
+ /* async update(id: string, updateDeviceGroupDto: UpdateDeviceGroupDto): Promise<DeviceGroup> {
+    return await`This action updates a #${id} deviceGroup`;
+  }*/
 
-  remove(id: number) {
-    return `This action removes a #${id} deviceGroup`;
+  async remove(id: string): Promise<DeviceGroup> {
+    const deviceGroup = await this.findOne(id);
+    await this.deviceGroupRepository.remove(deviceGroup);
+    return deviceGroup;
   }
 }
