@@ -27,8 +27,8 @@ export class StatusService {
     });
   }
 
-  async findStatusByName(statusName: string): Promise<Status> {
-    return await this.statusRepository.findOne({ where: { statusName: statusName } });
+  async findStatusByName(status: string): Promise<Status> {
+    return await this.statusRepository.findOne({ where: { status: status } });
   }
 
   /*async update(id: number, updateStatusDto: UpdateStatusDto) {

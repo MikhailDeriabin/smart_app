@@ -29,8 +29,8 @@ export class ManufacturerService {
   }
 
 
-  async findManufacturerByName(manufacturerName: string): Promise<Manufacturer> {
-    return await this.manufacturerRepository.findOne({ where: { manufacturerName: manufacturerName } });
+  async findManufacturerByName(manufacturer: string): Promise<Manufacturer> {
+    return await this.manufacturerRepository.findOne({ where: { manufacturer: manufacturer } });
   }
 
  /* update(id: string, updateManufacturerDto: UpdateManufacturerDto) {

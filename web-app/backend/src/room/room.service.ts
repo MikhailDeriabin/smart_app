@@ -34,8 +34,8 @@ export class RoomService {
     });
   }
 
-  async findRoomByName(roomName: string): Promise<Room> {
-    return await this.roomRepository.findOne({ where: { roomName: roomName } });
+  async findRoomByName(room: string): Promise<Room> {
+    return await this.roomRepository.findOne({ where: { room: room } });
   }
 
 

@@ -30,8 +30,8 @@ export class DeviceGroupService {
     });
   }
 
-  async findDeviceGroupByName(deviceGroupName: string): Promise<DeviceGroup> {
-    return await this.deviceGroupRepository.findOne({ where: { deviceGroupName: deviceGroupName } });
+  async findDeviceGroupByName(deviceGroup: string): Promise<DeviceGroup> {
+    return await this.deviceGroupRepository.findOne({ where: { deviceGroup: deviceGroup } });
   }
 
  /* async update(id: string, updateDeviceGroupDto: UpdateDeviceGroupDto): Promise<DeviceGroup> {

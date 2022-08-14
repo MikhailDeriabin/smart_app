@@ -30,8 +30,8 @@ export class TypeService {
     });
   }
 
-  async findTypeByName(typeName: string): Promise<Type> {
-    return await this.typeRepository.findOne({ where: { typeName: typeName } });
+  async findTypeByName(type: string): Promise<Type> {
+    return await this.typeRepository.findOne({ where: { type: type } });
   }
 
   /*update(id: number, updateTypeDto: UpdateTypeDto) {
