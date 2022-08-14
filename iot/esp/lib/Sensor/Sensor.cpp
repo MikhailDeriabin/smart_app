@@ -1,7 +1,8 @@
-#include "Arduino.h"
 #include "Component.h"
 #include "Sensor.h"
+#include "WiFiMQTTConnector.h"
 
-Sensor::Sensor() {
+Sensor::Sensor(WiFiMQTTConnector* wifiMQTTConnector) {
     Component::name = "Sensor";
+    this->wifiMQTTConnector = wifiMQTTConnector;
 }

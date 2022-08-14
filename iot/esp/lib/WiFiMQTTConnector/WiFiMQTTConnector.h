@@ -3,6 +3,7 @@
 
 #include <MQTTClient.h>
 #include <ESP8266WiFi.h>
+#include <SensorValue.h>
 
 class WiFiMQTTConnector{
 private:
@@ -24,6 +25,9 @@ public:
     void connectToBroker();
     int getDeviceIdFromTopic(char* topic);
     PubSubClient* getPubSubClient();
+    char** getTopics();
+    char* getTopicById(int id);
+    void sendSensorValues(char* topic, SensorValue sensorValues[], float values[], int valuesCount);
 };
 
 #endif

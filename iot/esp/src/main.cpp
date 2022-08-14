@@ -5,6 +5,7 @@
 #include "Lamp.h"
 #include "RGBLamp.h"
 #include "MotorL293D.h"
+#include "DHTSensor.h"
 #include "Status.h"
 #include "CommandValue.h"
 #include "Component.h"
@@ -23,22 +24,27 @@
 
 void callback(char *topic, byte *payload, unsigned int length);
 
+char* clientId = "1";
+const int componentCount = 4;
+
+WiFiMQTTConnector* wifiMQTTConnector = new WiFiMQTTConnector(clientId, componentCount);
+PubSubClient* client = wifiMQTTConnector->getPubSubClient();
+
 //Components
 Lamp lamp(ESP8266_D8);
 RGBLamp rgbLamp(ESP8266_D2, ESP8266_D3, ESP8266_D4);
 MotorL293D motor(ESP8266_D7, ESP8266_D6, ESP8266_D5);
+DHTSensor dhtSensor(ESP8266_D1, wifiMQTTConnector);
 
-const int componentCount = 3;
-Component* components[componentCount] = {&lamp, &rgbLamp, &motor};
-
-char* clientId = "1";
-WiFiMQTTConnector* wifiMQTTConnector = new WiFiMQTTConnector(clientId, componentCount);
-PubSubClient* client = wifiMQTTConnector->getPubSubClient();
+Component* components[componentCount] = {&lamp, &rgbLamp, &motor, &dhtSensor};
 
 void setup() {
   Serial.begin(9600); 
   
   delay(10);
+  for(int i=0; i<componentCount; i++){
+    components[i]->setId(i);
+  }
   client->setCallback(callback);
   wifiMQTTConnector->connectToBroker();
 }

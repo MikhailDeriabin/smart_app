@@ -1,4 +1,5 @@
 #include <Converter.h>
+#include <Arduino.h>
 
 Converter::Converter(){}
 
@@ -54,6 +55,52 @@ char* Converter::intToCharArr(int num, char arrTo[], int* arrSize){
         int digit = (int) floatNum % 10;
         floatNum /= 10;
         arrTo[i] = digit + '0';
+    }
+
+    return arrTo;
+}
+
+char* Converter::floatToCharArr(float num, char arrTo[], int* arrSize){
+    int pointIndex = 1;
+    float tempNum = num;
+    
+    if(num == 0){
+        *arrSize = 1;
+        arrTo[0] = '0';
+        return arrTo;
+    }
+
+    while(tempNum/10 > 1){
+        tempNum /= 10;
+        pointIndex++;
+    }
+
+    tempNum = num;
+    float intPart = (int) num;
+    int floatPartSize = 0;
+
+    while(tempNum/intPart != 1.0f){
+        tempNum *= 10;
+        intPart = (int) tempNum;
+        floatPartSize++;
+    }    
+
+    int numSize = pointIndex+floatPartSize;
+    if(floatPartSize > 0)
+        numSize++;
+    *arrSize = numSize;
+    
+        
+
+    int tempNumInt = (int)tempNum;
+    for(int i=numSize-1; i>=0; i--){
+        if(i != pointIndex){
+            int digit = (int) tempNumInt % 10;
+            tempNumInt /= 10;
+            arrTo[i] = digit + '0';
+        } else{
+            arrTo[i] = '.';
+        }       
     }
 
     return arrTo;
