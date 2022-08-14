@@ -2,6 +2,7 @@
 #define UTIL_H
 
 #include <CommandValue.h>
+#include <Component.h>
 
 class Util{
 public:
@@ -14,6 +15,8 @@ public:
     void getValueIndexesFromValueString(CommandValue key, char str[], int strSize, int* valueStartIndex, int* valueEndIndex);
     float getFloatValueFromValueString(CommandValue key, char str[], int strSize);
     int getIntValueFromValueString(CommandValue key, char str[], int strSize);
+
+    Component* getDeviceIdFromTopic(char* clientId, char* topic, Component* components[], int size);
 };
 
 #endif

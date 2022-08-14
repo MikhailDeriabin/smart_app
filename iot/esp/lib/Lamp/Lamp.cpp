@@ -9,7 +9,7 @@
 Lamp::Lamp(int pinNumber, bool isPinAnalog, int intensivity, float brightness) : pinNumber(pinNumber), isPinAnalog(isPinAnalog){
     Component::name = "Lamp";
     int pins [] = {this->pinNumber};
-    Component::setPinMode(pins, OUTPUT);
+    Component::setPinMode(pins, 1, OUTPUT);
     if(isPinAnalog){
         setIntensivity(intensivity);
         setBrightness(brightness);

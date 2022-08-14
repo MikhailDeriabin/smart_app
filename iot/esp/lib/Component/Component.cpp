@@ -18,9 +18,8 @@ char* Component::toString(){
     return this->name;
 }
 
-void Component::setPinMode(int pinNumbers[], int modeToSet){   
-    int arrLength = sizeof(pinNumbers)/sizeof(*pinNumbers);
-    for(int i=0; i<arrLength; i++){
+void Component::setPinMode(int pinNumbers[], int pinCount, int modeToSet){  
+    for(int i=0; i<pinCount; i++){
         pinMode(pinNumbers[i], OUTPUT);
     }
 }
