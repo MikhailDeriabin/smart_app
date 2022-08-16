@@ -1,46 +1,37 @@
 import { Injectable } from '@nestjs/common';
 const mqtt = require('mqtt');
-import url from 'node:url';
+import {MqttClient} from "mqtt";
 
 @Injectable()
 export class CommandService {
 
-    client : any;
+    client : MqttClient;
     mqttOptions : object = {
-        /*servers: [
+        servers: [
             {
-                host: 'localhost',
+                host: '192.168.50.93',
                 port: 1884
             }
-        ]*/
+        ]
     }
 
     constructor() {
-        const address = url.parse('192.168.50.93:1884');
-        this.client = mqtt.connect(address, this.mqttOptions);
+        this.client = mqtt.connect(this.mqttOptions);
     }
 
-    async create(commandObject: JSON): Promise<void> {
-        console.log('POST request');
+    async create(commandObject: any): Promise<void> {
+        let topic = commandObject.boardId + '/' + commandObject.deviceId;
 
-        this.client = mqtt.connect('mqtt://localhost:1884', this.mqttOptions);
+        let message = commandObject.command + ';';
+        const paramKeys = Object.keys(commandObject.params);
+        for(let i=0; i<paramKeys.length; i++){
+            const paramKey = paramKeys[i];
+            const paramValue = commandObject.params[paramKeys[i]];
+            message += paramKey[i] + ':' + paramValue;
+            if(i !== paramKeys.length-1)
+                message += ',';
+        }
 
-        this.client.publish('presence', 'Hello world!');
-
-        this.client.on('connect', function () {
-            this.client.subscribe('presence', function (err) {
-                if (!err) {
-                    this.client.publish('presence', 'Hello world!');
-                } else{
-                    console.log(err);
-                }
-            })
-        })
-
-        this.client.on('message', function (topic, message) {
-            // message is Buffer
-            console.log(message.toString());
-            this.client.end();
-        })
+        this.client.publish(topic, message);
     }
 }

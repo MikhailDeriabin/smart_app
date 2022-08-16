@@ -6,7 +6,7 @@ export class CommandController {
     constructor(private readonly commandService: CommandService) {}
 
     @Post()
-    async create(@Body() commandObject: JSON): Promise<void> {
+    async create(@Body() commandObject: any): Promise<void> {
         await this.commandService.create(commandObject);
     }
 }
