@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "backend/server.js",
   "dependencies": {
+    "@nestjs/config": "^2.2.0",
     "@nestjs/swagger": "^5.2.1",
     "axios": "^0.26.1",
     "body-parser": "^1.19.2",

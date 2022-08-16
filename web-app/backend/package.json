@@ -28,6 +28,7 @@
     "@nestjs/swagger": "^5.2.1",
     "@nestjs/typeorm": "^8.1.2",
     "dotenv": "^16.0.1",
+    "mqtt": "^4.3.7",
     "mysql2": "^2.3.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",

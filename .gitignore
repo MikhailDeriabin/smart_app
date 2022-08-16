@@ -1,3 +1,5 @@
+web-app/backend/src/app.module.ts
+
 # Logs
 logs
 *.log
