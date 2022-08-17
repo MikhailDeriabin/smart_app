@@ -15,7 +15,7 @@ export class StatusController {
 
   @Get()
   @ApiOperation({ summary: 'Get all statuses' })
-  @ApiResponse({ status: 200, description: 'Ok' })
+  @ApiResponse({ status: 200, description: 'Perkele, se toimii' })
   async findAll() {
     return await this.statusService.findAll();
   }

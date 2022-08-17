@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 const mqtt = require('mqtt');
 import {MqttClient} from "mqtt";
+import axios from "axios";
 
 @Injectable()
 export class CommandService {
@@ -19,7 +20,7 @@ export class CommandService {
         this.client = mqtt.connect(this.mqttOptions);
     }
 
-    async create(commandObject: any): Promise<void> {
+    async create(commandObject: any): Promise<object | void> {
         let topic = commandObject.boardId + '/' + commandObject.deviceId;
 
         let message = commandObject.command + ';';
@@ -32,6 +33,55 @@ export class CommandService {
                 message += ',';
         }
 
+        //TODO: env variables
+        const statusesResp = await axios.get('http://localhost:3000/status');
+        const statuses = statusesResp.data;
+        const measureEnum = 'MEASURE';
+        let measureEnumValue;
+        for(let i=0; i<statuses.length; i++) {
+            if (statuses[i].status === measureEnum)
+                measureEnumValue = statuses[i].id;
+        }
+
         this.client.publish(topic, message);
+        if(measureEnumValue === commandObject.command){
+            this.client.subscribe(topic);
+
+            const that = this;
+            const p = new Promise<object>(function(resolve, reject) {
+                that.client.on('message', function (topic, message) {
+                    const messageStr = message.toString();
+                    that.client.unsubscribe(topic);
+                    const respObj = that.sensorStrToObj(messageStr);
+                    resolve(respObj);
+                });
+            });
+
+            return p.then( (obj) =>  obj  );
+        }
+    }
+
+    sensorStrToObj(str: string): object{
+        const obj = {};
+        let currentKey = '';
+        for(let i=0; i<str.length; i++){
+            if(str[i] === ':'){
+                i++;
+                let currentValue = '';
+                for(;i<str.length; i++){
+                    if(str[i] === ',' || i === str.length-1 ){
+                        if(i === str.length-1)
+                            currentValue += str[i];
+                        obj[currentKey] = currentValue;
+                        currentKey = '';
+                        break;
+                    } else
+                        currentValue += str[i];
+                }
+            } else
+                currentKey += str[i];
+        }
+
+        return obj;
     }
 }
