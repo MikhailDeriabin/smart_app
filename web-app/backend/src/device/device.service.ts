@@ -110,9 +110,13 @@ export class DeviceService {
     }
 
     async update(id: string, updateDeviceDto: UpdateDeviceDto): Promise<Device> {
-        const updatedDevice = await this.findDeviceById(id);
-        await this.remove(id);
+        // await this.deviceRepository.update(id, {
+        //     ...(updateDeviceDto.deviceName && { deviceName: updateDeviceDto.deviceName }),
+        // });
 
+        const updatedDevice = await this.findDeviceById(id);
+        // await this.remove(id);
+        //
         const updatedDeviceName = updateDeviceDto.deviceName;
         const updatedDeviceBordId = updateDeviceDto.bordId;
         const updatedDeviceGroup = await this.deviceGroupService.findDeviceGroupByName(updateDeviceDto.deviceGroup);
@@ -122,7 +126,7 @@ export class DeviceService {
         if(updatedDeviceName!=null){
             updatedDevice.deviceName = updatedDeviceName
         }
-        if(updatedDeviceName!=null){
+        if(updatedDeviceBordId!=null){
             updatedDevice.bordId = updatedDeviceBordId
         }
         if(updatedDeviceGroup!=null){
@@ -134,8 +138,19 @@ export class DeviceService {
         if(updatedStatus!=null){
             updatedDevice.status = updatedStatus
         }
+        await this.deviceRepository.update(id, {
+            ...(updatedDevice.deviceName && { deviceName: updatedDevice.deviceName }),
+            ...(updatedDevice.bordId && { bordId: updatedDevice.bordId }),
+            ...(updatedDevice.status!=null && { status: updatedDevice.status }),
+            ...(updatedDevice.deviceGroup && { deviceGroup: updatedDevice.deviceGroup }),
+            ...(updatedDevice.room && { room: updatedDevice.room }),
 
-        return await this.deviceRepository.save(updatedDevice)
+        });
+
+
+        //
+        // return await this.deviceRepository.save(updatedDevice)
+        return this.deviceRepository.findOneOrFail(id,{relations: ['deviceGroup', 'room','manufacturer','status','type']});
     }
 
     async remove(id: string): Promise<Device> {
