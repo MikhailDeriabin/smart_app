@@ -23,54 +23,89 @@ SET @status_id_STOP_SPIN = 9;
 SET @status_id_MEASURE = 10;
 
 --Bosh
-INSERT INTO manufacturer (manufacturer) VALUES('Bosh');
+INSERT INTO manufacturer (manufacturer) VALUES('BOSH');
 SET @manufacturer_bosh_id = LAST_INSERT_ID();
 
-INSERT IGNORE INTO type (type) VALUES ('lamp');
+INSERT IGNORE INTO type (type) VALUES ('LAMP');
 SET @type_id = LAST_INSERT_ID();
 INSERT INTO manufacturer_types_type (manufacturerId,typeId) VALUES(@manufacturer_bosh_id, @type_id);
 
-INSERT INTO type_statuses_status (typeId,statusId) VALUES (@type_id, @status_id_OFF),(@type_id, @status_id_ON);
+INSERT INTO type_statuses_status (typeId,statusId) VALUES (@type_id, @status_id_OFF),(@type_id, @status_id_ON),
+                                                          (@type_id, @status_id_PULSE),(@type_id, @status_id_SET_BRIGHTNESS),(@type_id, @status_id_SET_INTENSIVITY);
 
 
-INSERT IGNORE INTO type (type) VALUES ('stove');
+INSERT IGNORE INTO type (type) VALUES ('RGB_LAMP');
 SET @type_id = LAST_INSERT_ID();
 INSERT INTO manufacturer_types_type (manufacturerId,typeId) VALUES(@manufacturer_bosh_id, @type_id);
 
 INSERT INTO type_statuses_status (typeId,statusId) VALUES(@type_id, @status_id_OFF),(@type_id, @status_id_ON),(@type_id, @status_id_PULSE),
-                                                         (@type_id, @status_id_SET_BRIGHTNESS),(@type_id, @status_id_SET_COLOR);
+                                                         (@type_id, @status_id_SET_BRIGHTNESS),(@type_id, @status_id_SET_INTENSIVITY),(@type_id, @status_id_SET_COLOR);
 
---Huawei
-INSERT INTO manufacturer (manufacturer) VALUES('Huawei');
-SET @manufacturer_huawei_id = LAST_INSERT_ID();
+--BEST_ALI
+INSERT INTO manufacturer (manufacturer) VALUES('BEST_ALI');
+SET @manufacturer_best_ali_id = LAST_INSERT_ID();
 
-INSERT IGNORE INTO type (type) VALUES ('smartLamp');
+INSERT IGNORE INTO type (type) VALUES ('MOTOR_L293D');
 SET @type_id = LAST_INSERT_ID();
-INSERT INTO manufacturer_types_type (manufacturerId,typeId) VALUES(@manufacturer_huawei_id, @type_id);
+INSERT INTO manufacturer_types_type (manufacturerId,typeId) VALUES(@manufacturer_best_ali_id, @type_id);
 
 INSERT INTO type_statuses_status (typeId,statusId) VALUES(@type_id, @status_id_OFF),(@type_id, @status_id_ON),
-                                                         (@type_id, @status_id_PULSE),(@type_id, @status_id_SET_BRIGHTNESS),(@type_id, @status_id_SET_COLOR);
+                                                         (@type_id, @status_id_SPIN_CLOCKWISE),(@type_id, @status_id_SPIN_COUNTERCLOCKWISE),(@type_id, @status_id_CHANGE_SPIN_DIRECTION);
+
+
+INSERT IGNORE INTO type (type) VALUES ('DHT_SENSOR');
+SET @type_id = LAST_INSERT_ID();
+INSERT INTO manufacturer_types_type (manufacturerId,typeId) VALUES(@manufacturer_best_ali_id, @type_id);
+
+INSERT INTO type_statuses_status (typeId,statusId) VALUES(@type_id, @status_id_OFF)(@type_id, @status_id_MEASURE);
+
+
+
 
 
 --Create Devices
 
---Dumb lamp
+--LAMP
 
-SET @manufacturerId = (SELECT ID FROM manufacturer WHERE manufacturer LIKE '%Bosh%');
+SET @manufacturerId = (SELECT ID FROM manufacturer WHERE manufacturer LIKE '%BOSH%');
 SET @statusId = (SELECT ID FROM status WHERE status='OFF');
-SET @typeId = (SELECT ID FROM type WHERE type LIKE '%lamp%' AND type NOT LIKE '%smartLamp');
+SET @typeId = (SELECT ID FROM type WHERE type LIKE '%LAMP%' AND type NOT LIKE '%RGB_LAMP');
 
 
 INSERT INTO device
-(deviceName, deviceConsumption, created, updated, manufacturerId, statusId, typeId, deviceGroupId, roomId)
-VALUES('dumbLamp1', 10, current_timestamp(6), current_timestamp(6), @manufacturerId, @statusId, @typeId, NULL, NULL);
+(deviceName, deviceConsumption,bordId,created, updated, manufacturerId, statusId, typeId, deviceGroupId, roomId)
+VALUES('LAMP_1', 10,1, current_timestamp(6), current_timestamp(6), @manufacturerId, @statusId, @typeId, NULL, NULL);
 
---Smart lamp
+--RGB_LAMP
 
-SET @manufacturerId = (SELECT ID FROM manufacturer WHERE manufacturer LIKE '%Huawei%');
+SET @manufacturerId = (SELECT ID FROM manufacturer WHERE manufacturer LIKE '%BOSH%');
 SET @statusId = (SELECT ID FROM status WHERE status='OFF');
-SET @typeId = (SELECT ID FROM type WHERE type LIKE '%smartLamp%');
+SET @typeId = (SELECT ID FROM type WHERE type LIKE '%RGB_LAMP%');
 
 INSERT INTO device
-(deviceName, deviceConsumption, created, updated, manufacturerId, statusId, typeId, deviceGroupId, roomId)
-VALUES('smartLamp1', 10, current_timestamp(6), current_timestamp(6), @manufacturerId, @statusId, @typeId, NULL, NULL);
+(deviceName, deviceConsumption,bordId, created, updated, manufacturerId, statusId, typeId, deviceGroupId, roomId)
+VALUES('RGB_LAMP_1', 10, 1, current_timestamp(6), current_timestamp(6), @manufacturerId, @statusId, @typeId, NULL, NULL);
+
+
+--MOTOR_L293D
+
+SET @manufacturerId = (SELECT ID FROM manufacturer WHERE manufacturer LIKE '%BEST_ALI%');
+SET @statusId = (SELECT ID FROM status WHERE status='OFF');
+SET @typeId = (SELECT ID FROM type WHERE type LIKE '%MOTOR_L293D%');
+
+INSERT INTO device
+(deviceName, deviceConsumption,bordId, created, updated, manufacturerId, statusId, typeId, deviceGroupId, roomId)
+VALUES('MOTOR_L293D_1', 10, 1, current_timestamp(6), current_timestamp(6), @manufacturerId, @statusId, @typeId, NULL, NULL);
+
+
+--DHT_SENSOR
+
+SET @manufacturerId = (SELECT ID FROM manufacturer WHERE manufacturer LIKE '%BEST_ALI%');
+SET @statusId = (SELECT ID FROM status WHERE status='MEASURE ');
+SET @typeId = (SELECT ID FROM type WHERE type LIKE '%MOTOR_L293D%');
+
+INSERT INTO device
+(deviceName, deviceConsumption,bordId, created, updated, manufacturerId, statusId, typeId, deviceGroupId, roomId)
+VALUES('DHT_SENSOR_1', 10, 1, current_timestamp(6), current_timestamp(6), @manufacturerId, @statusId, @typeId, NULL, NULL);
+
+

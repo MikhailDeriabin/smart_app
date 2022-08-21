@@ -10,18 +10,20 @@ import { DeviceGroupModule } from './device-group/device-group.module';
 import { RoomModule } from './room/room.module';
 import { StatusModule } from './status/status.module';
 import { CommandModule } from './command/command.module';
-
+// import dotenv from 'dotenv';
+// dotenv.config();
 
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'mariadb',
-     // "type": process.env.DATABASE_DIALECT,
+      // type: process.env.DATABASE_DIALECT,
       host: 'localhost',
       port: 3306,
-      username: 'olso',
-      password: 'olso',
+      // port: process.env.DATABASE_PORT,
+      username: 'root',
+      password: 'password',
       database: 'smartApp',
       autoLoadEntities: true,
      // entities: [Test],

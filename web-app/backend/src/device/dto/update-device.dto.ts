@@ -1,6 +1,6 @@
 import { CreateDeviceDto } from './create-device.dto';
 import {ApiProperty, PartialType} from "@nestjs/swagger";
-import {IsBoolean, IsNotEmpty, IsOptional, IsString} from "class-validator";
+import {IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString} from "class-validator";
 
 
 /*export class UpdateDeviceDto extends PartialType(CreateDeviceDto) {*/
@@ -17,6 +17,12 @@ export class UpdateDeviceDto {
     @IsNotEmpty()
     @IsOptional()
     deviceName?: string;
+
+    @ApiProperty({example:'1', description: "The platform id"})
+    @IsNumber()
+    @IsNotEmpty()
+    @IsOptional()
+    bordId?: number;
 
     @ApiProperty({example:'Lamps', description: 'The device group name',required:false})
     @IsString()

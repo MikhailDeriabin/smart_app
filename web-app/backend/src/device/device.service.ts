@@ -42,6 +42,7 @@ export class DeviceService {
         let device = new Device();
         const deviceName = createDeviceDto.deviceName;
         const deviceConsumption = createDeviceDto.deviceConsumption;
+        const deviceBordId = createDeviceDto.bordId;
         const manufacturer = await this.manufacturerService.findManufacturerByName(createDeviceDto.manufacturer);
         const type = await this.typeService.findTypeByName(createDeviceDto.type);
         const deviceGroup = await this.deviceGroupService.findDeviceGroupByName(createDeviceDto.deviceGroup);
@@ -50,6 +51,7 @@ export class DeviceService {
 
         device.deviceName = deviceName;
         device.deviceConsumption = deviceConsumption;
+        device.bordId = deviceBordId;
         device.manufacturer = manufacturer;
         device.type = type;
 
@@ -58,37 +60,47 @@ export class DeviceService {
             return device
         }
         if (deviceConsumption == null){
-            device.deviceConsumption = 0
+            device.deviceConsumption = 0;
         }
+
+        if(deviceBordId == null){
+            device.bordId = 0;
+        }
+
         if (manufacturer == null){
             device = null;
-            return device
+            return device;
         }
         if (type == null){
             device = null;
-            return device
+            return device;
         }
 
         if(deviceGroup!=null){
-            device.deviceGroup = deviceGroup
+            device.deviceGroup = deviceGroup;
         }
         if(room!=null){
-            device.room = room
+            device.room = room;
         }
 
-        return await this.deviceRepository.save(device)
+        return await this.deviceRepository.save(device);
     }
 
     async findAll(): Promise<Device[]> {
-        return await this.deviceRepository.find();
+        return await this.deviceRepository.find({
+            relations: ['deviceGroup', 'room','manufacturer','status','type']
+        });
+
     }
 
     async findDeviceById(id: string): Promise<Device> {
-        return await this.deviceRepository.findOneOrFail(id)
+        return await this.deviceRepository.findOneOrFail(id,{
+            relations: ['deviceGroup', 'room','manufacturer','status','type']
+        });
     }
 
     async findDeviceByName(deviceName: string): Promise<Device> {
-        return await this.deviceRepository.findOne({where: {deviceName: deviceName}});
+        return await this.deviceRepository.findOne({where: {deviceName: deviceName},relations: ['deviceGroup', 'room','manufacturer','status','type']});
     }
 
     async update(id: string, updateDeviceDto: UpdateDeviceDto): Promise<Device> {
@@ -96,12 +108,16 @@ export class DeviceService {
         await this.remove(id);
 
         const updatedDeviceName = updateDeviceDto.deviceName;
+        const updatedDeviceBordId = updateDeviceDto.bordId;
         const updatedDeviceGroup = await this.deviceGroupService.findDeviceGroupByName(updateDeviceDto.deviceGroup);
         const updatedRoom = await this.roomService.findRoomByName(updateDeviceDto.room);
         const updatedStatus = await this.statusService.findStatusByName(updateDeviceDto.status)
 
         if(updatedDeviceName!=null){
             updatedDevice.deviceName = updatedDeviceName
+        }
+        if(updatedDeviceName!=null){
+            updatedDevice.bordId = updatedDeviceBordId
         }
         if(updatedDeviceGroup!=null){
             updatedDevice.deviceGroup = updatedDeviceGroup

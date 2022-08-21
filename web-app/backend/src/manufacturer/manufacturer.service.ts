@@ -25,7 +25,7 @@ export class ManufacturerService {
   }
 
   async findOne(id: string): Promise<Manufacturer>  {
-    return await this.manufacturerRepository.findOneOrFail(id)
+    return await this.manufacturerRepository.findOneOrFail(id);
   }
 
 

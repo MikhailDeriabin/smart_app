@@ -16,13 +16,13 @@ export class DeviceController {
     type: Device
   })
   async create(@Body() createDeviceDto: CreateDeviceDto) {
-    const creator = await this.deviceService.insertDevice(createDeviceDto)
+    const newDevice = await this.deviceService.insertDevice(createDeviceDto)
 
-    if (creator == null){
-      return "bad json , try again"
+    if (newDevice == null){
+      return "Bad request , try again"
     }
     else {
-      return creator
+      return newDevice
     }
   }
 

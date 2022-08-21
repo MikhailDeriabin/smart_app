@@ -14,6 +14,11 @@ export class CreateDeviceDto {
     @IsNotEmpty()
     deviceConsumption: number;
 
+    @ApiProperty({example:'1', description: "The platform id"})
+    @IsNumber()
+    @IsNotEmpty()
+    bordId: number;
+
     @ApiProperty({example:'Philips', description: 'The device manufacturer'})
     @IsString()
     @IsNotEmpty()

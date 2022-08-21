@@ -30,6 +30,10 @@ export class Device {
     deviceConsumption?: number;
 
     @ApiProperty()
+    @Column()
+    bordId?: number;
+
+    @ApiProperty()
     @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
     created: Date;
 
