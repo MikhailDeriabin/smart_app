@@ -45,6 +45,7 @@ export class DeviceService {
         const deviceBordId = createDeviceDto.bordId;
         const manufacturer = await this.manufacturerService.findManufacturerByName(createDeviceDto.manufacturer);
         const type = await this.typeService.findTypeByName(createDeviceDto.type);
+        const status = await this.statusService.findStatusByName("off");
         const deviceGroup = await this.deviceGroupService.findDeviceGroupByName(createDeviceDto.deviceGroup);
         const room = await this.roomService.findRoomByName(createDeviceDto.room)
 
@@ -54,6 +55,7 @@ export class DeviceService {
         device.bordId = deviceBordId;
         device.manufacturer = manufacturer;
         device.type = type;
+        device.status = status;
 
         if (deviceName == null){
             device = null;
@@ -74,6 +76,10 @@ export class DeviceService {
         if (type == null){
             device = null;
             return device;
+        }
+
+        if(status != null){
+           device.status = status;
         }
 
         if(deviceGroup!=null){
