@@ -5,22 +5,22 @@ INSERT INTO device_group (deviceGroup) VALUES ('lamps'), ('tvs'), ('sensors');
 INSERT INTO room (room) VALUES ('kitchen'), ('bedroom'), ('washroom');
 
 
-INSERT INTO status (id, status) VALUES (0, 'OFF'),(1, 'ON'),(2, 'PULSE'),
-                                       (3, 'SET_BRIGHTNESS'),(4, 'SET_INTENSIVITY'),(5, 'SET_COLOR'),
-                                       (6, 'SPIN_CLOCKWISE'),(7, 'SPIN_COUNTERCLOCKWISE'),(8, 'CHANGE_SPIN_DIRECTION'),
-                                       (9, 'STOP_SPIN'),(10, 'MEASURE');
+INSERT INTO status (id, status) VALUES (1, 'OFF'),(2, 'ON'),(3 , 'PULSE'),
+                                       (4, 'SET_BRIGHTNESS'),(5, 'SET_INTENSIVITY'),(6, 'SET_COLOR'),
+                                       (7, 'SPIN_CLOCKWISE'),(8, 'SPIN_COUNTERCLOCKWISE'),(9, 'CHANGE_SPIN_DIRECTION'),
+                                       (10, 'STOP_SPIN'),(11, 'MEASURE');
 
-SET @status_id_OFF = 0;
-SET @status_id_ON = 1;
-SET @status_id_PULSE = 2;
-SET @status_id_SET_BRIGHTNESS = 3;
-SET @status_id_SET_INTENSIVITY = 4;
-SET @status_id_SET_COLOR = 5;
-SET @status_id_SPIN_CLOCKWISE = 6;
-SET @status_id_SPIN_COUNTERCLOCKWISE = 7;
-SET @status_id_CHANGE_SPIN_DIRECTION = 8;
-SET @status_id_STOP_SPIN = 9;
-SET @status_id_MEASURE = 10;
+SET @status_id_OFF = 1;
+SET @status_id_ON = 2;
+SET @status_id_PULSE = 3;
+SET @status_id_SET_BRIGHTNESS = 4;
+SET @status_id_SET_INTENSIVITY = 5;
+SET @status_id_SET_COLOR = 6;
+SET @status_id_SPIN_CLOCKWISE = 7;
+SET @status_id_SPIN_COUNTERCLOCKWISE = 8;
+SET @status_id_CHANGE_SPIN_DIRECTION = 9;
+SET @status_id_STOP_SPIN = 10;
+SET @status_id_MEASURE = 11;
 
 --Bosh
 INSERT INTO manufacturer (manufacturer) VALUES('BOSH');
