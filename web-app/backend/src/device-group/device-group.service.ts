@@ -21,7 +21,9 @@ export class DeviceGroupService {
   }
 
   async findAll(): Promise<DeviceGroup[]> {
-    return await this.deviceGroupRepository.find({ relations: ['device'] });
+    return await this.deviceGroupRepository.find({
+      // relations: ['device']
+    });
   }
 
   async findOne(id: string): Promise<DeviceGroup> {
