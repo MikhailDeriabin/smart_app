@@ -25,7 +25,9 @@ export class RoomService {
 
 
   async findAll(): Promise<Room[]> {
-    return await this.roomRepository.find({ relations: ['device'] });
+    return await this.roomRepository.find({
+      // relations: ['device']
+    });
   }
 
   async findOne(id: string): Promise<Room> {

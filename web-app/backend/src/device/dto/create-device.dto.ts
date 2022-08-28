@@ -19,7 +19,7 @@ export class CreateDeviceDto {
     @IsNotEmpty()
     bordId: number;
 
-    @ApiProperty({example:'Philips', description: 'The device manufacturer'})
+    @ApiProperty({example:'BEST_ALI', description: 'The device manufacturer'})
     @IsString()
     @IsNotEmpty()
     manufacturer: string;
