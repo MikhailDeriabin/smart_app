@@ -35,7 +35,7 @@ import { SensorValueModule } from './sensor-value/sensor-value.module';
     }),UsersModule, DeviceModule, ManufacturerModule, TypeModule, DeviceGroupModule, RoomModule, StatusModule, CommandModule, CommandValueModule, SensorValueModule,
   ],
   controllers: [AppController],
-  providers: [AppService, SensorValueService],
+  providers: [AppService],
 })
 
 

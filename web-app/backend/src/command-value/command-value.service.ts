@@ -2,10 +2,10 @@ import { Injectable } from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
 import {CommandValue} from "./entities/command-value.entity";
-import {SensorValue} from "../sensor-value/entities/sensor-value.entity";
-import {CreateSensorValueDto} from "../sensor-value/dto/create-sensor-value.dto";
+// import {SensorValue} from "../sensor-value/entities/sensor-value.entity";
+// import {CreateSensorValueDto} from "../sensor-value/dto/create-sensor-value.dto";
 import {CreateCommandValueDto} from "./dto/create-command-value.dto";
-import {UpdateSensorValueDto} from "../sensor-value/dto/update-sensor-value.dto";
+// import {UpdateSensorValueDto} from "../sensor-value/dto/update-sensor-value.dto";
 import {UpdateCommandValueDto} from "./dto/update-command-value.dto";
 
 @Injectable()
