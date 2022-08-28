@@ -3,11 +3,11 @@ import { PartialType } from '@nestjs/mapped-types';
 import {ApiProperty} from "@nestjs/swagger";
 import {IsArray, IsNotEmpty, IsString} from "class-validator";
 // import {CreateSensorValueDto} from "./create-sensor-value.dto";
-import {CreateStatusValueDto} from "./create-status-value.dto";
+import {CreateCommandValueDto} from "./create-command-value.dto";
 
 
 
-export class UpdateStatusValueDto extends PartialType(CreateStatusValueDto) {
+export class UpdateCommandValueDto extends PartialType(CreateCommandValueDto) {
 
 
     // @IsArray()

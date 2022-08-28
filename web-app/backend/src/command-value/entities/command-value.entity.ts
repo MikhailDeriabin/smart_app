@@ -11,7 +11,7 @@ import {Device} from "../../device/entities/device.entity";
 
 
 @Entity()
-export class StatusValue {
+export class CommandValue {
 
     @ApiProperty()
     @PrimaryColumn()
@@ -19,11 +19,11 @@ export class StatusValue {
 
     @ApiProperty()
     @Column()
-    statusName: string;
+    commandName: string;
 
     @ApiProperty()
     @Column()
-    statusValue: string;
+    commandValue: string;
 
     @ApiProperty()
     @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })

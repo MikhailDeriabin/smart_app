@@ -1,5 +1,5 @@
 import {Body, Controller, Delete, Get, Param, Patch, Post} from '@nestjs/common';
-import {StatusValueService} from "../status-value/status-value.service";
+import {CommandValueService} from "../command-value/command-value.service.ts";
 import {ApiCreatedResponse, ApiOperation, ApiResponse} from "@nestjs/swagger";
 import {SensorValueService} from "./sensor-value.service";
 import {DeviceGroup} from "../device-group/entities/device-group.entity";

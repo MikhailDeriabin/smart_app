@@ -13,7 +13,7 @@ import {Status} from "../../status/entities/status.entity";
 import {Type} from "../../type/entities/type.entity";
 import {DeviceGroup} from "../../device-group/entities/device-group.entity";
 import {Room} from "../../room/entities/room.entity";
-import {StatusValue} from "../../status-value/entities/status-value.entity";
+import {StatusValue} from "../../command-value/entities/command-value.entity";
 import {SensorValue} from "../../sensor-value/entities/sensor-value.entity";
 
 @Entity()
