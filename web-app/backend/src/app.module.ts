@@ -31,7 +31,7 @@ import { SensorValueModule } from './sensor-value/sensor-value.module';
       autoLoadEntities: true,
      // entities: [Test],
       // we should not use it in the production
-      synchronize: true,
+      synchronize: false,
     }),UsersModule, DeviceModule, ManufacturerModule, TypeModule, DeviceGroupModule, RoomModule, StatusModule, CommandModule, CommandValueModule, SensorValueModule,
   ],
   controllers: [AppController],

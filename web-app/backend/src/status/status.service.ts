@@ -23,7 +23,7 @@ export class StatusService {
 
   async findOne(id: string): Promise<Status> {
     return await this.statusRepository.findOneOrFail(id,{
-      relations: ['device','type'],
+      // relations: ['device'],
     });
   }
 
