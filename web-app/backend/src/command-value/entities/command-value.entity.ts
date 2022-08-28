@@ -34,7 +34,7 @@ export class CommandValue {
     updated: Date;
 
     @ApiProperty({ type: () => Device })
-    @ManyToOne(() => Device, (device) => device.statusValues)
+    @ManyToOne(() => Device, (device) => device.commandValues)
     device: Device;
 
 

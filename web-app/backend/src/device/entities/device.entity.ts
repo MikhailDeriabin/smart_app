@@ -13,7 +13,7 @@ import {Status} from "../../status/entities/status.entity";
 import {Type} from "../../type/entities/type.entity";
 import {DeviceGroup} from "../../device-group/entities/device-group.entity";
 import {Room} from "../../room/entities/room.entity";
-import {StatusValue} from "../../command-value/entities/command-value.entity";
+import {CommandValue} from "../../command-value/entities/command-value.entity";
 import {SensorValue} from "../../sensor-value/entities/sensor-value.entity";
 
 @Entity()
@@ -63,8 +63,8 @@ export class Device {
     @ManyToOne(() => Room, (room) => room.devices)
     room?: Room;
 
-    @OneToMany(() => StatusValue, (statusValue) => statusValue.device)
-    statusValues?: StatusValue[];
+    @OneToMany(() => CommandValue, (commandValue) => commandValue.device)
+    commandValues?: CommandValue[];
 
     @OneToMany(() => SensorValue, (sensorValue) => sensorValue.device)
     sensorValues?: SensorValue[];
