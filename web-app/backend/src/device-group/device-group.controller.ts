@@ -40,7 +40,7 @@ export class DeviceGroupController {
   }*/
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete a Photo' })
+  @ApiOperation({ summary: 'Delete a Device group' })
   @ApiResponse({ status: 200, description: 'Deleted' })
   @ApiResponse({ status: 404, description: 'could not find matching device group' })
   async remove(@Param('id') id: string) {

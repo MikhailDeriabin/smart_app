@@ -10,6 +10,9 @@ import { DeviceGroupModule } from './device-group/device-group.module';
 import { RoomModule } from './room/room.module';
 import { StatusModule } from './status/status.module';
 import { CommandModule } from './command/command.module';
+import { StatusValueModule } from './status-value/status-value.module';
+import { SensorValueService } from './sensor-value/sensor-value.service';
+import { SensorValueModule } from './sensor-value/sensor-value.module';
 // import dotenv from 'dotenv';
 // dotenv.config();
 
@@ -29,10 +32,10 @@ import { CommandModule } from './command/command.module';
      // entities: [Test],
       // we should not use it in the production
       synchronize: true,
-    }),UsersModule, DeviceModule, ManufacturerModule, TypeModule, DeviceGroupModule, RoomModule, StatusModule, CommandModule,
+    }),UsersModule, DeviceModule, ManufacturerModule, TypeModule, DeviceGroupModule, RoomModule, StatusModule, CommandModule, StatusValueModule, SensorValueModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, SensorValueService],
 })
 
 

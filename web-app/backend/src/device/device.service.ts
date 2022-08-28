@@ -136,7 +136,6 @@ export class DeviceService {
             updatedDevice.room = updatedRoom
         }
         if(updatedStatus!=null){
-            console.log("paska",updatedStatus)
             updatedDevice.status = updatedStatus
         }
         await this.deviceRepository.update(id, {
