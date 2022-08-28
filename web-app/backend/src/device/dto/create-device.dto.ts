@@ -24,19 +24,19 @@ export class CreateDeviceDto {
     @IsNotEmpty()
     manufacturer: string;
 
-    @ApiProperty({example:'TV', description: 'The device type'})
+    @ApiProperty({example:'RGB_LAMP', description: 'The device type'})
     @IsString()
     @IsNotEmpty()
     type: string;
 
 
-    @ApiProperty({example:'Lamps', description: 'The device group name',required:false})
+    @ApiProperty({example:'lamps', description: 'The device group name',required:false})
     @IsString()
     @IsOptional()
     @IsNotEmpty()
     deviceGroup?: string;
 
-    @ApiProperty({example:'Kitchen', description: 'The device room name',required:false})
+    @ApiProperty({example:'kitchen', description: 'The device room name',required:false})
     @IsString()
     @IsOptional()
     @IsNotEmpty()
