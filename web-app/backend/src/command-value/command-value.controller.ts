@@ -17,7 +17,7 @@ export class CommandValueController {
 
 
     @Post()
-    @ApiOperation({ summary: 'Create a status value' })
+    @ApiOperation({ summary: 'Create a command value' })
     @ApiCreatedResponse({
         description: ' a status value created ',
         type: CommandValue
@@ -47,8 +47,8 @@ export class CommandValueController {
     @ApiOperation({summary: 'Updated'})
     @ApiResponse({status:200, description: 'Ok'})
     @ApiResponse({status:404, description: 'could not find matching CommandValue '})
-    async update(@Param('id') id: string, @Body() updateStatusValueDto: UpdateCommandValueDto) {
-        return await this.commandValueService.update(id, updateStatusValueDto);
+    async update(@Param('id') id: string, @Body() updateCommandValueDto: UpdateCommandValueDto) {
+        return await this.commandValueService.update(id, updateCommandValueDto);
     }
 
 

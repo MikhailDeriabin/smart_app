@@ -17,10 +17,10 @@ export class CommandValueService {
     ) {}
 
 
-    async create(createStatusValueDto: CreateCommandValueDto): Promise<CommandValue> {
+    async create(createCommandValueDto: CreateCommandValueDto): Promise<CommandValue> {
         const commandValue = new CommandValue();
-        commandValue.commandName = createStatusValueDto.commandName;
-        commandValue.commandValue = createStatusValueDto.commandValue;
+        commandValue.commandName = createCommandValueDto.commandName;
+        commandValue.commandValue = createCommandValueDto.commandValue;
         // deviceGroup.deviceGroup = createSensorValueDto.deviceGroup
         return await this.commandValueRepository.save(commandValue);
     }
@@ -36,8 +36,8 @@ export class CommandValueService {
     }
 
 
-    async findStatusValueByName(statusName: string): Promise<CommandValue> {
-        return await this.commandValueRepository.findOne({ where: { statusName: statusName } });
+    async findCommandValueByName(commandName: string): Promise<CommandValue> {
+        return await this.commandValueRepository.findOne({ where: { commandName: commandName } });
     }
 
     async update(id: string, updateCommandValueDto: UpdateCommandValueDto): Promise<CommandValue> {
@@ -45,7 +45,7 @@ export class CommandValueService {
 
         await this.commandValueRepository.update(id, {
             ...(updateCommandValueDto.commandName && { commandName: updateCommandValueDto.commandName }),
-            ...(updateCommandValueDto.commandValue && { statusValue: updateCommandValueDto.commandValue }),
+            ...(updateCommandValueDto.commandValue && { commandValue: updateCommandValueDto.commandValue }),
         });
 
         return this.commandValueRepository.findOneOrFail(id,{relations: ['device']});
@@ -53,9 +53,9 @@ export class CommandValueService {
 
 
     async remove(id: string): Promise<CommandValue> {
-        const statusValue = await this.findOne(id);
-        await this.commandValueRepository.remove(statusValue);
-        return statusValue;
+        const commandValue = await this.findOne(id);
+        await this.commandValueRepository.remove(commandValue);
+        return commandValue;
     }
 
 }
