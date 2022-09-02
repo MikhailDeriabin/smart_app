@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 const mqtt = require('mqtt');
 import {MqttClient} from "mqtt";
 import axios from "axios";
+import {Command} from "./command";
 
 @Injectable()
 export class CommandService {
@@ -20,17 +21,19 @@ export class CommandService {
         this.client = mqtt.connect(this.mqttOptions);
     }
 
-    async create(commandObject: any): Promise<object | void> {
+    async create(commandObject: Command): Promise<object | void> {
         let topic = commandObject.boardId + '/' + commandObject.deviceId;
 
         let message = commandObject.command + ';';
-        const paramKeys = Object.keys(commandObject.params);
-        for(let i=0; i<paramKeys.length; i++){
-            const paramKey = paramKeys[i];
-            const paramValue = commandObject.params[paramKeys[i]];
-            message += paramKey[i] + ':' + paramValue;
-            if(i !== paramKeys.length-1)
-                message += ',';
+        if(commandObject.params != null){
+            const paramKeys = Object.keys(commandObject.params);
+            for(let i=0; i<paramKeys.length; i++){
+                const paramKey = paramKeys[i];
+                const paramValue = commandObject.params[paramKeys[i]];
+                message += paramKey[i] + ':' + paramValue;
+                if(i !== paramKeys.length-1)
+                    message += ',';
+            }
         }
 
         //TODO: env variables

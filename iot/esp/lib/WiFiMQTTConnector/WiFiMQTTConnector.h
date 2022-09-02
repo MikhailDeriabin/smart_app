@@ -15,7 +15,7 @@ private:
     WiFiClient wifiClient;
     PubSubClient* pubSubClient;
 
-    char* clientId;
+    char* clientId;   
     int componentCount;
     char** topics;
 

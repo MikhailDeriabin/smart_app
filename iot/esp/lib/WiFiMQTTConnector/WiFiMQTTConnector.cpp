@@ -9,7 +9,7 @@
 WiFiMQTTConnector::WiFiMQTTConnector(char* clientId, const int componentCount){
     pubSubClient = new PubSubClient(mqtt_server, mqtt_port, wifiClient);
 
-    this->componentCount = componentCount;
+    this->componentCount = componentCount;   
     this->clientId = clientId; 
 
     topics = new char*[componentCount];
@@ -18,9 +18,8 @@ WiFiMQTTConnector::WiFiMQTTConnector(char* clientId, const int componentCount){
     for(int i=0; i<componentCount; i++){
         String wholeTopic = topicStart + i;        
         char* wholeTopicArr = new char[wholeTopic.length()];
-        for(int j=0; j<wholeTopic.length(); j++){
-            wholeTopicArr[j] = wholeTopic[j];
-        }
+        for(int j=0; j<wholeTopic.length(); j++)
+            wholeTopicArr[j] = wholeTopic[j];      
         topics[i] = wholeTopicArr;
     }   
 }
@@ -38,9 +37,8 @@ void WiFiMQTTConnector::connectToBroker(){
             delay(2000);
         }   
     }
-    for(int i=0; i<componentCount; i++){
-        pubSubClient->subscribe(topics[i]);
-    }
+    for(int i=0; i<componentCount; i++)
+        pubSubClient->subscribe(topics[i]);    
 }
 
 void WiFiMQTTConnector::setup_wifi() {
